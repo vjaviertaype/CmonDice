@@ -27,6 +27,9 @@
 1728603005 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/JUEGO/juego.c
 	"juego.h"
 
-1728694188 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/CONFIG_INICIAL/configInicial.c
+1728697065 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/CONFIG_INICIAL/configInicial.c
 	"configInicial.h"
+
+1728694276 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/main.c
+	"CMON_DICE/cmonDice.h"
 

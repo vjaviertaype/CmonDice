@@ -16,7 +16,7 @@ int cargarConfig(const char *archivo_config, tConfig *configs,unsigned cant_conf
                  &buffer.tiempo_turno,
                  &buffer.cant_vidas) == 4 && i < cant_configs)
     {
-        if(validarConfig(&buffer))
+        if(validarConfig(&buffer) == TODO_OK)
         {
             mostrarConfig(&buffer);
             memcpy(configs,&buffer,sizeof(tConfig));
@@ -33,8 +33,11 @@ int validarConfig(tConfig *config)
 {
     if (!isalpha(config->nivel)
             || config->cant_vidas > 5
+            || config->cant_vidas <= 0
             || config->tiempo_muestra > 20
-            || config->tiempo_turno > 20)
+            || config->tiempo_muestra <= 0
+            || config->tiempo_turno > 20
+            || config->tiempo_turno <= 0)
     {
         return 0;
     }
