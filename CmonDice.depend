@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1728603005 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/cmonDice.c
+	"cmonDice.h"
+
+1728603005 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/cmonDice.h
+	"CONFIG_INICIAL/configInicial.h"
+	"JUEGO/juego.h"
+
+1728694313 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/CONFIG_INICIAL/configInicial.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"../estructuras.h"
+	"../macros.h"
+
+1728689202 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/estructuras.h
+
+1728603005 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/macros.h
+
+1728603005 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/JUEGO/juego.h
+	<stdio.h>
+	<stdlib.h>
+	"../estructuras.h"
+	"../macros.h"
+
+1728603005 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/JUEGO/juego.c
+	"juego.h"
+
+1728694188 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/CONFIG_INICIAL/configInicial.c
+	"configInicial.h"
+
