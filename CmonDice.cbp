@@ -45,9 +45,22 @@
 		<Unit filename="CMON_DICE/cmonDice.h" />
 		<Unit filename="CMON_DICE/estructuras.h" />
 		<Unit filename="CMON_DICE/macros.h" />
+		<Unit filename="LIBS/TDA_LISTA/lista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LIBS/TDA_LISTA/lista.h" />
+		<Unit filename="LIBS/VALIDACION_RESP/validacionResp.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LIBS/VALIDACION_RESP/validacionResp.h" />
+		<Unit filename="LIBS/comun.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="turno.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="turno.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -1,4 +1,15 @@
 # depslib dependency file v1.0
+1728839063 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/api/api.c
+	"api.h"
+
+1728834718 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/api/api.h
+	<stdio.h>
+	<stdlib.h>
+	<curl/curl.h>
+
+1728839043 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/api/main.c
+	"api.h"
+
 1728603005 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/cmonDice.c
 	"cmonDice.h"
 
@@ -24,12 +35,117 @@
 	"../estructuras.h"
 	"../macros.h"
 
-1728603005 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/JUEGO/juego.c
-	"juego.h"
-
 1728697065 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/CONFIG_INICIAL/configInicial.c
 	"configInicial.h"
 
-1728694276 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/main.c
-	"CMON_DICE/cmonDice.h"
+1728603005 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/CMON_DICE/JUEGO/juego.c
+	"juego.h"
+
+1729389490 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/LIBS/TDA_LISTA/lista.c
+	"lista.h"
+
+1729292844 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/LIBS/TDA_LISTA/lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<unistd.h>
+	"../comun.h"
+
+1729275518 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/LIBS/comun.h
+
+1729291902 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/LIBS/VALIDACION_RESP/validacionResp.c
+	"validacionResp.h"
+
+1729468680 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/LIBS/VALIDACION_RESP/validacionResp.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"../TDA_LISTA/lista.h"
+
+1729384016 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/main.c
+	"turno.h"
+
+1729468692 /mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/turno.h
+	<pthread.h>
+	<windows.h>
+	<unistd.h>
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"LIBS/VALIDACION_RESP/validacionResp.h"
+	"LIBS/TDA_LISTA/lista.h"
+
+1729388436 source:/mnt/data/docs/algoritmos/resueltos-grupo/CmonDice/turno.c
+	"turno.h"
+
+1728603005 source:d:\docs\algoritmos\resueltos-grupo\cmondice\cmon_dice\cmondice.c
+	"cmonDice.h"
+
+1728603005 d:\docs\algoritmos\resueltos-grupo\cmondice\cmon_dice\cmondice.h
+	"CONFIG_INICIAL/configInicial.h"
+	"JUEGO/juego.h"
+
+1728694313 d:\docs\algoritmos\resueltos-grupo\cmondice\cmon_dice\config_inicial\configinicial.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"../estructuras.h"
+	"../macros.h"
+
+1728689202 d:\docs\algoritmos\resueltos-grupo\cmondice\cmon_dice\estructuras.h
+
+1728603005 d:\docs\algoritmos\resueltos-grupo\cmondice\cmon_dice\macros.h
+
+1728603005 d:\docs\algoritmos\resueltos-grupo\cmondice\cmon_dice\juego\juego.h
+	<stdio.h>
+	<stdlib.h>
+	"../estructuras.h"
+	"../macros.h"
+
+1728697065 source:d:\docs\algoritmos\resueltos-grupo\cmondice\cmon_dice\config_inicial\configinicial.c
+	"configInicial.h"
+
+1728603005 source:d:\docs\algoritmos\resueltos-grupo\cmondice\cmon_dice\juego\juego.c
+	"juego.h"
+
+1729384016 source:d:\docs\algoritmos\resueltos-grupo\cmondice\main.c
+	"turno.h"
+
+1729551976 d:\docs\algoritmos\resueltos-grupo\cmondice\turno.h
+	<pthread.h>
+	<windows.h>
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<conio.h>
+	"LIBS/VALIDACION_RESP/validacionResp.h"
+	"LIBS/TDA_LISTA/lista.h"
+
+1729468680 d:\docs\algoritmos\resueltos-grupo\cmondice\libs\validacion_resp\validacionresp.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"../TDA_LISTA/lista.h"
+
+1729292844 d:\docs\algoritmos\resueltos-grupo\cmondice\libs\tda_lista\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<unistd.h>
+	"../comun.h"
+
+1729275518 d:\docs\algoritmos\resueltos-grupo\cmondice\libs\comun.h
+
+1729389490 source:d:\docs\algoritmos\resueltos-grupo\cmondice\libs\tda_lista\lista.c
+	"lista.h"
+
+1729291902 source:d:\docs\algoritmos\resueltos-grupo\cmondice\libs\validacion_resp\validacionresp.c
+	"validacionResp.h"
+
+1729551930 source:d:\docs\algoritmos\resueltos-grupo\cmondice\turno.c
+	"turno.h"
 
