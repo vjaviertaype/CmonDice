@@ -149,3 +149,84 @@
 1729551930 source:d:\docs\algoritmos\resueltos-grupo\cmondice\turno.c
 	"turno.h"
 
+1728603005 source:d:\repos\repos_windows\cmondice\cmon_dice\cmondice.c
+	"cmonDice.h"
+
+1728603005 d:\repos\repos_windows\cmondice\cmon_dice\cmondice.h
+	"CONFIG_INICIAL/configInicial.h"
+	"JUEGO/juego.h"
+
+1728694313 d:\repos\repos_windows\cmondice\cmon_dice\config_inicial\configinicial.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"../estructuras.h"
+	"../macros.h"
+
+1728689202 d:\repos\repos_windows\cmondice\cmon_dice\estructuras.h
+
+1729559420 d:\repos\repos_windows\cmondice\cmon_dice\macros.h
+
+1728603005 d:\repos\repos_windows\cmondice\cmon_dice\juego\juego.h
+	<stdio.h>
+	<stdlib.h>
+	"../estructuras.h"
+	"../macros.h"
+
+1729562394 source:d:\repos\repos_windows\cmondice\cmon_dice\config_inicial\configinicial.c
+	"configInicial.h"
+
+1728603005 source:d:\repos\repos_windows\cmondice\cmon_dice\juego\juego.c
+	"juego.h"
+
+1729561695 source:d:\repos\repos_windows\cmondice\libs\tda_lista\lista.c
+	"lista.h"
+
+1729559554 d:\repos\repos_windows\cmondice\libs\tda_lista\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<unistd.h>
+	"../comun.h"
+
+1729275518 d:\repos\repos_windows\cmondice\libs\comun.h
+
+1729291902 source:d:\repos\repos_windows\cmondice\libs\validacion_resp\validacionresp.c
+	"validacionResp.h"
+
+1729468680 d:\repos\repos_windows\cmondice\libs\validacion_resp\validacionresp.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"../TDA_LISTA/lista.h"
+
+1729562911 source:d:\repos\repos_windows\cmondice\main.c
+	"turno.h"
+	"LIBS/TDA_COLA/cola.h"
+
+1729558393 d:\repos\repos_windows\cmondice\turno.h
+	<pthread.h>
+	<windows.h>
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<conio.h>
+	"CMON_DICE/CONFIG_INICIAL/configInicial.h"
+	"LIBS/VALIDACION_RESP/validacionResp.h"
+	"LIBS/TDA_LISTA/lista.h"
+
+1729561760 source:d:\repos\repos_windows\cmondice\turno.c
+	"turno.h"
+
+1725721472 source:d:\repos\repos_windows\cmondice\libs\tda_cola\cola.c
+	"cola.h"
+
+1729559552 d:\repos\repos_windows\cmondice\libs\tda_cola\cola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../comun.h"
+

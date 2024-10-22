@@ -45,6 +45,10 @@
 		<Unit filename="CMON_DICE/cmonDice.h" />
 		<Unit filename="CMON_DICE/estructuras.h" />
 		<Unit filename="CMON_DICE/macros.h" />
+		<Unit filename="LIBS/TDA_COLA/cola.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LIBS/TDA_COLA/cola.h" />
 		<Unit filename="LIBS/TDA_LISTA/lista.c">
 			<Option compilerVar="CC" />
 		</Unit>

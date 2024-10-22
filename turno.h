@@ -10,10 +10,10 @@
 #include <ctype.h>
 #include <conio.h>
 
+#include "CMON_DICE/CONFIG_INICIAL/configInicial.h"
 #include "LIBS/VALIDACION_RESP/validacionResp.h"
 #include "LIBS/TDA_LISTA/lista.h"
 
-#define TODO_OK 1;
 
 //Datos para usar con cronometro "Hilos"
 typedef struct {
@@ -35,13 +35,13 @@ typedef struct
 	unsigned int puntos_turno;
 }tRonda;
 
-typedef struct
-{
-	char nivel; // F = facil, N = normal, D = dificil
-	unsigned int tiempo_muestra;
-	unsigned int tiempo_turno;
-	unsigned cant_vidas;
-}tConfig;
+//typedef struct
+//{
+//	char nivel; // F = facil, N = normal, D = dificil
+//	unsigned int tiempo_muestra;
+//	unsigned int tiempo_turno;
+//	unsigned cant_vidas;
+//}tConfig;
 
 /**FUNCION PRINCIPAL QUE GESTIONA EL TURNO DE CADA JUGADOR*/
 int turnoJugador(tJugador* jugador_actual, tConfig config_partida);

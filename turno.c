@@ -246,8 +246,8 @@ void limpiarBufferTeclado()
         ... y FlushConsoleInputBuffer para limpiar dicho buffer, eliminando cualquier entrada PENDIENTE que no haya sido procesada.
         Esto asegura que el buffer esté completamente vacío antes de solicitar nueva entrada del usuario, evitando errores o lecturas no deseadas.
     */
-    //HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
-    //FlushConsoleInputBuffer(hStdin);
+    HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
+    FlushConsoleInputBuffer(hStdin);
 }
 
 void mostrarRonda(int ronda)
@@ -256,7 +256,7 @@ void mostrarRonda(int ronda)
     printf("*************************\n");
     printf("***** R O N D A - %d *****\n",ronda);
     printf("*************************\n");
-    sleep(2);
+    Sleep(250);
     limpiarPantalla();
 }
 
@@ -276,28 +276,15 @@ int respuestaJugador(tLista* l, unsigned int tiempo_turno)
 {
     int cant_caracteres_resp = 0;
     int continuar = 1;
-    time_t tiempo_inicio = time(NULL),tiempo_actual; // tiempo de inicio
+    time_t tiempo_inicio = time(NULL),tiempo_actual;
     char letra_resp;
 
-    //Datos datos = {&tiempo_turno, &continuar};
-    //pthread_t hiloCronometro;
-
-    //Si la lista no esta vacia se debe contar la cantidad de caracteres que tiene
     if(!listaVacia(l))
         mapLista(l,&cant_caracteres_resp, contarCantidad);
 
-    // Crear el hilo para el cronómetro
-    //if (pthread_create(&hiloCronometro, NULL, cronometro, &datos) != 0)
-    //{
-    //    perror("Error al crear el hilo");
-    //    return -1; // Error al crear el hilo
-    //}
-
-    //limpiarBufferTeclado();
     while (continuar)
     {
         tiempo_actual = time(NULL);
-        //limpiarBufferTeclado();
 
         if (difftime(tiempo_actual,tiempo_inicio) >= tiempo_turno)
         {
@@ -307,8 +294,6 @@ int respuestaJugador(tLista* l, unsigned int tiempo_turno)
 
         if (_kbhit())
         {
-            // Windows: revisar si hay una tecla presionada
-
             letra_resp = _getch(); // Leer la tecla presionada
             letra_resp = toupper(letra_resp);
 
@@ -325,26 +310,12 @@ int respuestaJugador(tLista* l, unsigned int tiempo_turno)
                 cant_caracteres_resp++;
                 ponerAlFinal(l, &letra_resp, sizeof(char));
             }
+            else if (letra_resp == '\r') {
+                continuar = 0;
+                break;
+            }
         }
-
-        /// Si el cronómetro llegó a 0, continuar cambiara su estado a 0
-        // if(continuar)
-        // {
-        //   letra_resp = toupper(letra_resp);
-        // if(letra_resp == 'Z')
-        //{
-        //  ponerAlFinal(l, &letra_resp, sizeof(char));
-        //continuar = 0;
-        //}
-        //else if (isalpha(letra_resp) && (letra_resp == 'A' || letra_resp == 'V' || letra_resp == 'R' || letra_resp == 'N'))
-        //{
-        //  cant_caracteres_resp++;
-//                ponerAlFinal(l, &letra_resp, sizeof(char));
-        //          }
-        //    }
     }
-    // Esperar a que el hilo del cronometro termine
-    // pthread_join(hiloCronometro, NULL);
 
     return cant_caracteres_resp;
 }
@@ -405,7 +376,7 @@ void contarCantidad(void* e, void* contexto)
 
 void mostrarCaracter(void* e)
 {
-    printf("%c ", *((char*)e) );
+    printf("%c", *((char*)e) );
 }
 
 void limpiarPantalla()

@@ -170,7 +170,7 @@ int mostrarSecuenciaXTiempo(tLista* l, unsigned int tiempo_muestra, Mostrar most
     {
         mostrar((*nodo_actual)->info);
         nodo_actual = &(*nodo_actual)->sig;
-        sleep(1);
+        Sleep(400);
     }
 
     ///Si el tiempo es 0 se mostrara la secuencia indefinidamente
