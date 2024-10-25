@@ -180,10 +180,10 @@
 1728603005 source:d:\repos\repos_windows\cmondice\cmon_dice\juego\juego.c
 	"juego.h"
 
-1729816688 source:d:\repos\repos_windows\cmondice\libs\tda_lista\lista.c
+1729891973 source:d:\repos\repos_windows\cmondice\libs\tda_lista\lista.c
 	"lista.h"
 
-1729816122 d:\repos\repos_windows\cmondice\libs\tda_lista\lista.h
+1729891973 d:\repos\repos_windows\cmondice\libs\tda_lista\lista.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -204,13 +204,12 @@
 	<ctype.h>
 	"../TDA_LISTA/lista.h"
 
-1729822044 source:d:\repos\repos_windows\cmondice\main.c
+1729891973 source:d:\repos\repos_windows\cmondice\main.c
 	"turno.h"
 	"LIBS/TDA_COLA/cola.h"
 	"LIBS/ARCHIVO/archivo.h"
 
-1729825224 d:\repos\repos_windows\cmondice\turno.h
-	<pthread.h>
+1729891973 d:\repos\repos_windows\cmondice\turno.h
 	<windows.h>
 	<time.h>
 	<stdio.h>
@@ -221,9 +220,10 @@
 	"LIBS/ARCHIVO/archivo.h"
 	"LIBS/VALIDACION_RESP/validacionResp.h"
 	"LIBS/TDA_LISTA/lista.h"
+	"LIBS/API/api.h"
 	"estructuras.h"
 
-1729825565 source:d:\repos\repos_windows\cmondice\turno.c
+1729891973 source:d:\repos\repos_windows\cmondice\turno.c
 	"turno.h"
 
 1729810809 source:d:\repos\repos_windows\cmondice\libs\tda_cola\cola.c
@@ -250,7 +250,7 @@
 	"comun.h"
 	"TDA_LISTA/lista.h"
 
-1729825981 source:d:\repos\repos_windows\cmondice\libs\archivo\archivo.c
+1729891973 source:d:\repos\repos_windows\cmondice\libs\archivo\archivo.c
 	"archivo.h"
 
 1729819467 d:\repos\repos_windows\cmondice\libs\archivo\archivo.h
@@ -260,7 +260,7 @@
 	"../TDA_LISTA/lista.h"
 	"../../estructuras.h"
 
-1729817204 d:\repos\repos_windows\cmondice\estructuras.h
+1729891973 d:\repos\repos_windows\cmondice\estructuras.h
 
 1729553831 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\validacion_resp\validacionresp.c
 	"validacionResp.h"
@@ -346,6 +346,14 @@
 	"api.h"
 
 1729882302 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\api\api.h
+	<stdio.h>
+	<stdlib.h>
+	<curl/curl.h>
+
+1729891973 source:d:\repos\repos_windows\cmondice\libs\api\api.c
+	"api.h"
+
+1729891973 d:\repos\repos_windows\cmondice\libs\api\api.h
 	<stdio.h>
 	<stdlib.h>
 	<curl/curl.h>

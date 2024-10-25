@@ -1,5 +1,12 @@
-bin/*
-obj/*
+# Ignora las carpetas de compilacion y los ejecutables guardados en ellos.
+bin/
+obj/
+
+# No guarda el anterior estado de codeblocks y las dependencias.
+# Se debe realizar un pequeño tutorial de como configurar codeblock para que funcione el juego.
 *.layout
 *.depend
+
+# Si quieren cambiar la cabezera/prefijo de los informes no se olviden agregarlo aqui.
+# formato: prefijo_*.txt
 informe_*.txt
