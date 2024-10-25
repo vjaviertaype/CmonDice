@@ -5,11 +5,14 @@
 #define DIFICULTAD_SELECCIONADA 1
 #define NOMBRE_CONFIG "config.txt"
 
+
 void mostrarInstrucciones();
 int ingresoDeJugadores(tLista *);
 int menuIngresoJugador(tJugador *pj);
 void mostrarJugador(tJugador *pj);
 int compararEnteros(const void *a, const void *b);
+
+int compararPuntajeJugador(const void *a, const void *b);
 
 /**
 Tareas:
@@ -30,6 +33,11 @@ int main()
     tJugador jugador_actual;
     int cant_jugadores, i;
 
+    ///Integracion de libreria API
+    CURL *curl;
+    const char * url = "https://www.random.org/integers/?num=1&min=1&max=4&col=1&base=10&format=plain&rnd=new";
+    inicializa_manejo_curl(&curl);
+
     crearLista(&jugadores);
     crearLista(&tabla);
     mostrarInstrucciones();
@@ -47,23 +55,19 @@ int main()
             mostrarJugador(&jugador_actual);
 
             generarCabeceraJugador(informe, i, jugador_actual.nombre_jugador);
-            turnoJugador(informe, &jugador_actual, vec[DIFICULTAD_SELECCIONADA]);
+            turnoJugador(informe, &jugador_actual, vec[DIFICULTAD_SELECCIONADA], curl, url);
             printf("Puntos de %s : %d\n", jugador_actual.nombre_jugador, jugador_actual.puntos);
             fprintf(informe, "Puntaje Final: %d\n", jugador_actual.puntos);
-            ponerAlFinal(&jugadores, &jugador_actual, sizeof(tJugador));
-        }
 
-        for (i = 0; i < cant_jugadores; i++)
-        {
-            sacarPrimeroLista(&jugadores, &jugador_actual, sizeof(tJugador));
-            insertarOrdenado(&tabla, &jugador_actual, sizeof(tJugador), compararEnteros);
+            pausa();
+            insertarOrdenado(&tabla, &jugador_actual, sizeof(tJugador), compararPuntajeJugador, true, false);
         }
     }
     else
     {
         return ERROR_FATAL;
     }
-
+    limpia_y_cierra_api(curl);
     finalizarInforme(informe, &tabla, compararEnteros);
     return 0;
 }
@@ -130,6 +134,15 @@ void mostrarJugador(tJugador *pj)
     printf("*****************************\n");
     pausa();
 }
+
+int compararPuntajeJugador(const void *a, const void *b)
+{
+    tJugador* e1 = (tJugador* )a;
+    tJugador* e2 = (tJugador* )b;
+
+    return e1->puntos - e2->puntos;
+}
+
 int compararEnteros(const void *a, const void *b)
 {
     return *(int *)b - *(int *)a;

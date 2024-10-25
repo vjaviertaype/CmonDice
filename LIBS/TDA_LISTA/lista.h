@@ -32,6 +32,8 @@ int mostrarSecuenciaXTiempo(tLista* l, unsigned int tiempo_muestra, Mostrar most
 int listasIguales(tLista* l_sec, tLista* l_resp,Cmp cmp);
 
 /** Inserta de forma Ordenada en una lista segun un criterio dado por un comparador**/
-int insertarOrdenado(tLista *l, const void *dato, unsigned cantBytes, Cmp comparar);
+//int insertarOrdenado(tLista *l, const void *dato, unsigned cantBytes, Cmp comparar);
+
+int insertarOrdenado(tLista* l, void* dato, unsigned cantBytes, Cmp cmp, bool duplicado, bool ordenAsc);
 
 #endif // LISTA_H_INCLUDED

@@ -1,13 +1,7 @@
 #include "turno.h"
 
-int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida)
+int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida, CURL *curl, const char*url)
 {
-    /**Se genera una secuencia solo para casos de prueba**/
-    tLista l_sec_ya_generada;
-    crearLista(&l_sec_ya_generada);
-    generarSecuenciaParaPruebas(&l_sec_ya_generada);
-    /*************** BORRAR LUEGO ************************/
-
     //Se inicializan los parametros que se usaran para registrar los movimientos del jugador
     tRonda ronda_juego = {config_partida.cant_vidas, 0, 0};
 
@@ -33,7 +27,7 @@ int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida)
     generarCabezeraRonda(info,&ronda_juego);
 
     //Simulacion de solicitid api
-    generarSecuencia(&l_sec_ya_generada,&l_sec);
+    generarSecuencia(&l_sec, curl, url);
 
     //Una vez generada la secuencia se muestra en pantalla el tiempo que indique la configuracion de partida
     puts("Se muestra secuencia : ");
@@ -84,7 +78,7 @@ int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida)
                 /**COMIENZA NUEVA RONDA**/
                 mostrarRonda(++ronda);
                 config_partida.tiempo_turno++;
-                generarSecuencia(&l_sec_ya_generada,&l_sec);
+                generarSecuencia(&l_sec, curl, url);
                 puts("Se muestra Secuencia :");
                 mostrarSecuenciaXTiempo(&l_sec, config_partida.tiempo_muestra, mostrarCaracter);
                 puts("Ingrese su respuesta :");
@@ -227,11 +221,14 @@ void respuestaIncorrecta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda
 /** Simulacion de solicitud api :
     Simula un pedido a la api de un digito y lo almacena al final de la lista de secuencia
 */
-int generarSecuencia(tLista* sec_ya_generada, tLista* sec)
+int generarSecuencia(tLista* sec, CURL*curl, const char*url)
 {
+    CURLcode res;
     char letra;
-    sacarPrimeroLista(sec_ya_generada, &letra, sizeof(char));
+    int num;
+    respuesta_api(curl, &res, url, &num);
 
+    letra = convierteNumeroAletra(num);
     ponerAlFinal(sec, &letra, sizeof(char));
 
     return 1;
@@ -267,18 +264,6 @@ void mostrarRonda(int ronda)
     limpiarPantalla();
 }
 
-/** EXPLICACION DE HILOS Y COMO SE IMPLEMENTA EN LA FUNCION respuestaJugador()
-
-    La función respuestaJugador() se encarga de recibir la entrada de caracteres del jugador. Mientras tanto,
-    ... se ejecuta en paralelo un cronómetro en un hilo independiente, creado con pthread_create, que cuenta el tiempo restante.
-    Ambas funciones trabajan simultáneamente: mientras el jugador ingresa caracteres, el cronómetro va disminuyendo el tiempo disponible.
-
-    Si el jugador ingresa 'Z' (carácter especial), se detiene el proceso, tanto en respuestaJugador() como en cronometro(),
-    ... ya que la variable continuar cambia su valor a 0, interrumpiendo ambos ciclos.
-
-    - Si el cronómetro llega a 0, también se cambia el valor de continuar a 0, lo que termina el ciclo de entrada del jugador.
-     Esto asegura que el programa gestione tanto la entrada de caracteres como el tiempo disponible de forma concurrente.
-*/
 int respuestaJugador(tLista* l, unsigned int tiempo_turno)
 {
     int cant_caracteres_resp = 0;
@@ -296,7 +281,7 @@ int respuestaJugador(tLista* l, unsigned int tiempo_turno)
 
         if (difftime(tiempo_actual,tiempo_inicio) >= tiempo_turno)
         {
-            printf("\nTiempo agotado. El programa ha finalizado.\n");
+            printf("\nTiempo agotado.\n");
             break;
         }
 
@@ -327,35 +312,6 @@ int respuestaJugador(tLista* l, unsigned int tiempo_turno)
     }
 
     return cant_caracteres_resp;
-}
-
-void* cronometro(void* args)
-{
-    Datos* datos = (Datos*)args;
-    unsigned int tiempo_restante = *datos->tiempo_turno;
-
-    /**
-        -Si tiempo_restante es mayor a 0 y continuar vale 1, entonces el tiempo se decrementa.
-        -Tambien puede ocurrir que el usuario ingrese 'Z' (un carácter especial).
-        Si eso sucede antes de que el tiempo se acabe, continuar valdrá 0, lo que hará que el ciclo while termine.
-    */
-    while (tiempo_restante > 0 && *datos->continuar)
-    {
-        sleep(1); // Espera un segundo
-        tiempo_restante--;
-    }
-
-    if (tiempo_restante == 0)
-    {
-        // Cambia continuar a 0 cuando se acaba el tiempo.
-        // Esto provocara que en la funcion donde se invoco el hilo el valor de continuar cambie a 0.
-        *datos->continuar = 0;
-
-        limpiarPantalla();
-        printf("EL TIEMPO SE ACABO, PRESIONE ENTER PARA VER EL RESULTADO...");
-    }
-
-    return NULL;
 }
 
 int cuantasVidasUsar(int min, int max)
@@ -409,37 +365,4 @@ void pausa()
     printf("Presione Enter para continuar...");
     getchar();  /// Espera a que el usuario presione Enter
 #endif
-}
-
-//Solo para crear el lote de pruebas...luego borrar
-int generarSecuenciaParaPruebas(tLista* lista)
-{
-    char letra = 'N';
-    ponerAlFinal(lista, &letra, sizeof(char));
-
-    letra = 'A';
-    ponerAlFinal(lista, &letra, sizeof(char));
-
-    letra = 'A';
-    ponerAlFinal(lista, &letra, sizeof(char));
-
-    letra = 'V';
-    ponerAlFinal(lista, &letra, sizeof(char));
-
-    letra = 'R';
-    ponerAlFinal(lista, &letra, sizeof(char));
-
-    letra = 'N';
-    ponerAlFinal(lista, &letra, sizeof(char));
-
-    letra = 'A';
-    ponerAlFinal(lista, &letra, sizeof(char));
-
-    letra = 'R';
-    ponerAlFinal(lista, &letra, sizeof(char));
-
-    letra = 'N';
-    ponerAlFinal(lista, &letra, sizeof(char));
-
-    return 1;
 }

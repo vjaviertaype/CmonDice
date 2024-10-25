@@ -1,11 +1,11 @@
 #ifndef ESTRUCTURAS_H_INCLUDED
 #define ESTRUCTURAS_H_INCLUDED
 
-//Datos para usar con cronometro "Hilos"
-typedef struct {
-    unsigned int* tiempo_turno;
-    int* continuar;
-} Datos;
+////Datos para usar con cronometro "Hilos"
+//typedef struct {
+//    unsigned int* tiempo_turno;
+//    int* continuar;
+//} Datos;
 
 typedef struct
 {

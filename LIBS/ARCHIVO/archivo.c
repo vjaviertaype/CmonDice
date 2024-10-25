@@ -25,7 +25,6 @@ int generarCabeceraJugador(FILE *info,int pos,char *nombre)
 
 int generarCabezeraRonda(FILE *info,tRonda *ronda_actual)
 {
-
     return fprintf(info, "Cantidad de vidas: %u\nSecuencia\t|Respuesta\t|Puntaje Actual\t|Vidas Usadas\t\n",ronda_actual->vidas_total);
 }
 
@@ -50,31 +49,33 @@ void imprimirCaracterEnArchivo(void *caracter,void *archivo)
     fprintf((FILE *)archivo,"%c",*(char*)caracter);
 }
 
-
-int finalizarInforme(FILE *info, tLista *p_jugadores,Cmp comparar)
+int finalizarInforme(FILE *info, tLista *p_jugadores, Cmp comparar)
 {
-
     tJugador jugador_actual;
-    int puntaje_prev,pos;
+    int puntaje_prev = -1;  // Valor inicial para comparar el primer puntaje
+    int pos = 1;
 
-    puntaje_prev = pos = 0;
-    fprintf(info,"Tabla de Puntaje\n");
+    fprintf(info, "Tabla de Puntaje");
+
     while(!listaVacia(p_jugadores))
     {
-        sacarPrimeroLista(p_jugadores,&jugador_actual,sizeof(tJugador));
-        if(comparar(&puntaje_prev,&jugador_actual.puntos) != 0)
+        sacarPrimeroLista(p_jugadores, &jugador_actual, sizeof(tJugador));
+
+        if (comparar(&puntaje_prev, &jugador_actual.puntos) != 0)
         {
-            fprintf(info,"\n");
-            fprintf(info,"%d - %s",pos + 1,jugador_actual.nombre_jugador);
-            pos++;
+            fprintf(info, "\n%d - %s", pos++, jugador_actual.nombre_jugador);
         }
         else
         {
-            fprintf(info,", %s",jugador_actual.nombre_jugador);
+            fprintf(info, ", %s", jugador_actual.nombre_jugador);
         }
+
         puntaje_prev = jugador_actual.puntos;
     }
 
     fclose(info);
     return 1;
 }
+
+
+

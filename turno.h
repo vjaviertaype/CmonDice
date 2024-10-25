@@ -1,7 +1,6 @@
 #ifndef TURNO_H_INCLUDED
 #define TURNO_H_INCLUDED
 
-#include <pthread.h>// Para usar hilos..por lo que averigue deberia funcionar en linux
 #include <windows.h>// Solo se uso para el manejo del buffer del teclado de consola...investigar si existe otra manera que sea mas estandar
 
 #include <time.h>
@@ -14,11 +13,11 @@
 #include "LIBS/ARCHIVO/archivo.h"
 #include "LIBS/VALIDACION_RESP/validacionResp.h"
 #include "LIBS/TDA_LISTA/lista.h"
-
+#include "LIBS/API/api.h"
 #include "estructuras.h"
 
 /**FUNCION PRINCIPAL QUE GESTIONA EL TURNO DE CADA JUGADOR*/
-int turnoJugador(FILE *info, tJugador* jugador_actual, tConfig config_partida);
+int turnoJugador(FILE *info, tJugador* jugador_actual, tConfig config_partida, CURL*curl, const char*url);
 
 /**Solo muestra la ronda que esta por empezar*/
 void mostrarRonda(int ronda);
@@ -27,13 +26,10 @@ void mostrarRonda(int ronda);
     -Solo se le debe pasar como argumento la lista donde se guardara lo que solicite de la api.
     -"Lista* sec_ya_generada" Solo esta para generar los lotes de prueba.
 */
-int generarSecuencia(tLista* sec_ya_generada, tLista* sec);
+int generarSecuencia(tLista* sec, CURL*curl, const char*url);
 
 /**Esta funcion sirve para que el jugador ingrese letra por letra su respuesta en la lista en un determinado tiempo */
 int respuestaJugador(tLista* l, unsigned int tiempo_turno);
-
-/** Funcion de cronometro que sera ejecutada por los hilos */
-void* cronometro(void* args);
 
 void limpiarBufferTeclado();
 
