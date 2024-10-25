@@ -158,11 +158,9 @@ int eliminarNUltimos(tLista* l, unsigned cantBytes, int cantElim)
     while (sacarUltimoLista(l, info, cantBytes) && ++eliminados < cantElim);
 
     free(info);
-    // Retorna 0 si no se eliminaron elementos
     return 0;
 }
 
-///Hacerla generica
 int mostrarSecuenciaXTiempo(tLista* l, unsigned int tiempo_muestra, Mostrar mostrar)
 {
     tNodo** nodo_actual = l;
@@ -170,10 +168,9 @@ int mostrarSecuenciaXTiempo(tLista* l, unsigned int tiempo_muestra, Mostrar most
     {
         mostrar((*nodo_actual)->info);
         nodo_actual = &(*nodo_actual)->sig;
-        Sleep(400);
+        Sleep(300);
     }
 
-    ///Si el tiempo es 0 se mostrara la secuencia indefinidamente
     if(tiempo_muestra != 0)
     {
         sleep(tiempo_muestra);
@@ -205,6 +202,39 @@ int listasIguales(tLista* l_uno,tLista* l_dos,Cmp cmp)
     //Para que sean iguales ambos nodos deben contener null
     if( *e1 || *e2 )
         return 0;
+
+    return 1;
+}
+
+int insertarOrdenado(tLista *l, const void *dato, unsigned cantBytes, Cmp comparar) {
+    tNodo *nue, *actual, *prev;
+
+    prev = actual = *l;
+    while (actual != NULL && comparar(dato, actual->info) > 0) {
+        prev = actual;
+        actual = actual->sig;
+    }
+
+    nue = (tNodo *)malloc(sizeof(tNodo));
+    if (!nue) {
+        return 0;
+    }
+
+    nue->info = malloc(cantBytes);
+    if (!nue->info) {
+        free(nue);
+        return 0;
+    }
+
+    memcpy(nue->info, dato, cantBytes);
+    nue->tamInfo = cantBytes;
+
+    nue->sig = actual;
+    if (prev == NULL) {
+        *l = nue;
+    } else {
+        prev->sig = nue;
+    }
 
     return 1;
 }

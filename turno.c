@@ -1,6 +1,6 @@
 #include "turno.h"
 
-int turnoJugador(tJugador* jugador_actual, tConfig config_partida)
+int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida)
 {
     /**Se genera una secuencia solo para casos de prueba**/
     tLista l_sec_ya_generada;
@@ -30,6 +30,7 @@ int turnoJugador(tJugador* jugador_actual, tConfig config_partida)
 
     //Muestra la ronda actual
     mostrarRonda(ronda);
+    generarCabezeraRonda(info,&ronda_juego);
 
     //Simulacion de solicitid api
     generarSecuencia(&l_sec_ya_generada,&l_sec);
@@ -65,6 +66,8 @@ int turnoJugador(tJugador* jugador_actual, tConfig config_partida)
         ///Si no tiene vidas y no respondio correctamente...
         if(ronda_juego.vidas_total == 0 && ( resp == RESPUESTA_INCORRECTA || resp == NO_CONTESTA || resp == USO_CARACTER_ESPECIAL))
         {
+            guardarRonda(info,&ronda_juego,&l_sec,&l_resp);
+
             limpiarPantalla();
             puts("NO TIENE MAS VIDAS");
             puts("\nGAME OVER\n");
@@ -76,7 +79,7 @@ int turnoJugador(tJugador* jugador_actual, tConfig config_partida)
             {
                 puts("RESPUESTA CORRECTA");
                 pausa();
-                respuestaCorrecta(jugador_actual,&l_resp, &ronda_juego);
+                respuestaCorrecta(info, jugador_actual, &l_sec, &l_resp, &ronda_juego);
 
                 /**COMIENZA NUEVA RONDA**/
                 mostrarRonda(++ronda);
@@ -90,19 +93,20 @@ int turnoJugador(tJugador* jugador_actual, tConfig config_partida)
             {
                 puts("RESPUESTA INCORRECTA");
                 pausa();
-                respuestaIncorrecta(&l_resp, &ronda_juego, cant_caracteres_resp);
+                respuestaIncorrecta(info, &l_sec, &l_resp, &ronda_juego, cant_caracteres_resp);
+
             }
             else if(resp == USO_CARACTER_ESPECIAL)
             {
                 puts("Uso caracter especial");
                 pausa();
-                usoCaracterEspecial(&l_resp, &l_sec,&ronda_juego, config_partida.tiempo_muestra,cant_caracteres_resp);
+                usoCaracterEspecial(info, &l_sec, &l_resp, &ronda_juego, config_partida.tiempo_muestra,cant_caracteres_resp);
             }
             else if(resp == NO_CONTESTA)
             {
                 puts("No contesta");
                 pausa();
-                noContesta(&ronda_juego, &l_sec, config_partida.tiempo_muestra);
+                noContesta(info, &l_sec, &l_resp, &ronda_juego, config_partida.tiempo_muestra);
             }
         }
     }
@@ -113,23 +117,28 @@ int turnoJugador(tJugador* jugador_actual, tConfig config_partida)
     return TODO_OK;
 }
 
-void respuestaCorrecta(tJugador* jugador, tLista* l_resp, tRonda* ronda_juego)
+void respuestaCorrecta(FILE*info, tJugador* jugador, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego)
 {
     //Si no uso vidas, el jugador gana 3 puntos...de lo contrario solo sumara 1
     if(ronda_juego->vidas_consumidas == 0)
+    {
         jugador->puntos+=3;
+        ronda_juego->puntos_turno = 3;
+    }
     else
+    {
         jugador->puntos++;
+        ronda_juego->puntos_turno = 1;
+    }
+
+    guardarRonda(info,ronda_juego,l_sec,l_resp);
 
     vaciarLista(l_resp);
-
-    /*Aca se tendria que generar un informe de fin de turno*/
-
     ronda_juego->vidas_consumidas = 0;
     ronda_juego->puntos_turno = 0;
 }
 
-void noContesta(tRonda* ronda_juego, tLista* sec, unsigned tiempo_muestra)
+void noContesta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, unsigned tiempo_muestra)
 {
     limpiarPantalla();
 
@@ -140,11 +149,11 @@ void noContesta(tRonda* ronda_juego, tLista* sec, unsigned tiempo_muestra)
 
     //...y se le vuelve a mostrar la secuencia
     puts("Se consumio una vida, la secuencia se mostrara nuevamente");
-    mostrarSecuenciaXTiempo(sec, tiempo_muestra, mostrarCaracter);
+    mostrarSecuenciaXTiempo(l_sec, tiempo_muestra, mostrarCaracter);
     puts("Vuelva a escribir su respuesta : ");
 }
 
-void usoCaracterEspecial(tLista* l_resp,tLista* l_sec, tRonda* ronda_juego, unsigned tiempo_muestra,int cant_car_resp)
+void usoCaracterEspecial(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, unsigned tiempo_muestra,int cant_car_resp)
 {
     limpiarPantalla();
 
@@ -186,10 +195,9 @@ void usoCaracterEspecial(tLista* l_resp,tLista* l_sec, tRonda* ronda_juego, unsi
     }
     ronda_juego->vidas_total -= vidas_a_usar;
     ronda_juego->vidas_consumidas += vidas_a_usar;
-
 }
 
-void respuestaIncorrecta(tLista* l_resp, tRonda* ronda_juego, int cant_car_resp)
+void respuestaIncorrecta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, int cant_car_resp)
 {
     limpiarPantalla();
 
@@ -214,7 +222,6 @@ void respuestaIncorrecta(tLista* l_resp, tRonda* ronda_juego, int cant_car_resp)
 
     ronda_juego->vidas_total -= vidas_a_usar;
     ronda_juego->vidas_consumidas += vidas_a_usar;
-
 }
 
 /** Simulacion de solicitud api :
@@ -279,6 +286,7 @@ int respuestaJugador(tLista* l, unsigned int tiempo_turno)
     time_t tiempo_inicio = time(NULL),tiempo_actual;
     char letra_resp;
 
+    /// esto se puede remplazar con una cola no hay necesidad de utilizar un map, es demaciado
     if(!listaVacia(l))
         mapLista(l,&cant_caracteres_resp, contarCantidad);
 
@@ -310,7 +318,8 @@ int respuestaJugador(tLista* l, unsigned int tiempo_turno)
                 cant_caracteres_resp++;
                 ponerAlFinal(l, &letra_resp, sizeof(char));
             }
-            else if (letra_resp == '\r') {
+            else if (letra_resp == '\r')
+            {
                 continuar = 0;
                 break;
             }

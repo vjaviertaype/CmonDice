@@ -10,41 +10,15 @@
 #include <ctype.h>
 #include <conio.h>
 
-#include "CMON_DICE/CONFIG_INICIAL/configInicial.h"
+#include "LIBS/CONFIG/config.h"
+#include "LIBS/ARCHIVO/archivo.h"
 #include "LIBS/VALIDACION_RESP/validacionResp.h"
 #include "LIBS/TDA_LISTA/lista.h"
 
-
-//Datos para usar con cronometro "Hilos"
-typedef struct {
-    unsigned int* tiempo_turno;
-    int* continuar;
-} Datos;
-
-typedef struct
-{
-	char nombre_jugador[16];
-	int puntos;
-}tJugador;
-
-//tRonda es necesario para llevar registro de cada movimiento del jugador
-typedef struct
-{
-	unsigned int vidas_total;
-	unsigned int vidas_consumidas;
-	unsigned int puntos_turno;
-}tRonda;
-
-//typedef struct
-//{
-//	char nivel; // F = facil, N = normal, D = dificil
-//	unsigned int tiempo_muestra;
-//	unsigned int tiempo_turno;
-//	unsigned cant_vidas;
-//}tConfig;
+#include "estructuras.h"
 
 /**FUNCION PRINCIPAL QUE GESTIONA EL TURNO DE CADA JUGADOR*/
-int turnoJugador(tJugador* jugador_actual, tConfig config_partida);
+int turnoJugador(FILE *info, tJugador* jugador_actual, tConfig config_partida);
 
 /**Solo muestra la ronda que esta por empezar*/
 void mostrarRonda(int ronda);
@@ -71,10 +45,10 @@ int cuantasVidasUsar(int min, int max);
 /**Funciones encargadas de procesar las respuestas :
     -Tambien se le debe pasar el puntero FILE para que se registren los movimientos del turno
 */
-void respuestaCorrecta(tJugador* jugador, tLista* l_resp, tRonda* rondaJuego);
-void respuestaIncorrecta(tLista* l_resp, tRonda* rondaJuego, int cant_car_resp);
-void usoCaracterEspecial(tLista* l_resp, tLista* l_sec, tRonda* rondaJuego, unsigned tiempo_muestra ,int cant_car_resp);
-void noContesta(tRonda* ronda_juego, tLista* sec, unsigned tiempo_muestra);
+void respuestaCorrecta(FILE*info, tJugador* jugador, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego);
+void noContesta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, unsigned tiempo_muestra);
+void usoCaracterEspecial(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, unsigned tiempo_muestra ,int cant_car_resp);
+void respuestaIncorrecta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, int cant_car_resp);
 
 ///Funciones que se usan como puntero a funcion..
 void contarCantidad(void* e, void* contexto);
