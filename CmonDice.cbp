@@ -31,20 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="CMON_DICE/CONFIG_INICIAL/configInicial.c">
+		<Unit filename="LIBS/API/api.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="CMON_DICE/CONFIG_INICIAL/configInicial.h" />
-		<Unit filename="CMON_DICE/JUEGO/juego.c">
+		<Unit filename="LIBS/API/api.h" />
+		<Unit filename="LIBS/ARCHIVO/archivo.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="CMON_DICE/JUEGO/juego.h" />
-		<Unit filename="CMON_DICE/cmonDice.c">
+		<Unit filename="LIBS/ARCHIVO/archivo.h" />
+		<Unit filename="LIBS/CONFIG/config.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="CMON_DICE/cmonDice.h" />
-		<Unit filename="CMON_DICE/estructuras.h" />
-		<Unit filename="CMON_DICE/macros.h" />
+		<Unit filename="LIBS/CONFIG/config.h" />
 		<Unit filename="LIBS/TDA_COLA/cola.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -57,7 +55,11 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LIBS/VALIDACION_RESP/validacionResp.h" />
+		<Unit filename="LIBS/comun.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="LIBS/comun.h" />
+		<Unit filename="estructuras.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

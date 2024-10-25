@@ -164,7 +164,7 @@
 	"../estructuras.h"
 	"../macros.h"
 
-1728689202 d:\repos\repos_windows\cmondice\cmon_dice\estructuras.h
+1729810176 d:\repos\repos_windows\cmondice\cmon_dice\estructuras.h
 
 1729559420 d:\repos\repos_windows\cmondice\cmon_dice\macros.h
 
@@ -174,24 +174,26 @@
 	"../estructuras.h"
 	"../macros.h"
 
-1729562394 source:d:\repos\repos_windows\cmondice\cmon_dice\config_inicial\configinicial.c
+1729563017 source:d:\repos\repos_windows\cmondice\cmon_dice\config_inicial\configinicial.c
 	"configInicial.h"
 
 1728603005 source:d:\repos\repos_windows\cmondice\cmon_dice\juego\juego.c
 	"juego.h"
 
-1729561695 source:d:\repos\repos_windows\cmondice\libs\tda_lista\lista.c
+1729816688 source:d:\repos\repos_windows\cmondice\libs\tda_lista\lista.c
 	"lista.h"
 
-1729559554 d:\repos\repos_windows\cmondice\libs\tda_lista\lista.h
+1729816122 d:\repos\repos_windows\cmondice\libs\tda_lista\lista.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<stdbool.h>
 	<unistd.h>
+	<windows.h>
 	"../comun.h"
 
-1729275518 d:\repos\repos_windows\cmondice\libs\comun.h
+1729815608 d:\repos\repos_windows\cmondice\libs\comun.h
+	<time.h>
 
 1729291902 source:d:\repos\repos_windows\cmondice\libs\validacion_resp\validacionresp.c
 	"validacionResp.h"
@@ -202,11 +204,12 @@
 	<ctype.h>
 	"../TDA_LISTA/lista.h"
 
-1729562911 source:d:\repos\repos_windows\cmondice\main.c
+1729822044 source:d:\repos\repos_windows\cmondice\main.c
 	"turno.h"
 	"LIBS/TDA_COLA/cola.h"
+	"LIBS/ARCHIVO/archivo.h"
 
-1729558393 d:\repos\repos_windows\cmondice\turno.h
+1729825224 d:\repos\repos_windows\cmondice\turno.h
 	<pthread.h>
 	<windows.h>
 	<time.h>
@@ -214,19 +217,136 @@
 	<stdlib.h>
 	<ctype.h>
 	<conio.h>
-	"CMON_DICE/CONFIG_INICIAL/configInicial.h"
+	"LIBS/CONFIG/config.h"
+	"LIBS/ARCHIVO/archivo.h"
 	"LIBS/VALIDACION_RESP/validacionResp.h"
 	"LIBS/TDA_LISTA/lista.h"
+	"estructuras.h"
 
-1729561760 source:d:\repos\repos_windows\cmondice\turno.c
+1729825565 source:d:\repos\repos_windows\cmondice\turno.c
 	"turno.h"
 
-1725721472 source:d:\repos\repos_windows\cmondice\libs\tda_cola\cola.c
+1729810809 source:d:\repos\repos_windows\cmondice\libs\tda_cola\cola.c
 	"cola.h"
 
-1729559552 d:\repos\repos_windows\cmondice\libs\tda_cola\cola.h
+1729815829 d:\repos\repos_windows\cmondice\libs\tda_cola\cola.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"../comun.h"
+
+1729810164 source:d:\repos\repos_windows\cmondice\libs\informe\informe.c
+
+1729810700 source:d:\repos\repos_windows\cmondice\libs\config\config.c
+	"config.h"
+
+1729815816 d:\repos\repos_windows\cmondice\libs\config\config.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1729815729 source:d:\repos\repos_windows\cmondice\libs\comun.c
+	"comun.h"
+	"TDA_LISTA/lista.h"
+
+1729825981 source:d:\repos\repos_windows\cmondice\libs\archivo\archivo.c
+	"archivo.h"
+
+1729819467 d:\repos\repos_windows\cmondice\libs\archivo\archivo.h
+	<stdio.h>
+	<stdlib.h>
+	"../comun.h"
+	"../TDA_LISTA/lista.h"
+	"../../estructuras.h"
+
+1729817204 d:\repos\repos_windows\cmondice\estructuras.h
+
+1729553831 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\validacion_resp\validacionresp.c
+	"validacionResp.h"
+
+1729553831 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\validacion_resp\validacionresp.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"../TDA_LISTA/lista.h"
+
+1729865887 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_lista\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<unistd.h>
+	<windows.h>
+	"../comun.h"
+
+1729834659 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\comun.h
+	<time.h>
+
+1729883190 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\archivo\archivo.c
+	"archivo.h"
+
+1729834659 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\archivo\archivo.h
+	<stdio.h>
+	<stdlib.h>
+	"../comun.h"
+	"../TDA_LISTA/lista.h"
+	"../../estructuras.h"
+
+1729878602 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\estructuras.h
+
+1729834659 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\comun.c
+	"comun.h"
+	"TDA_LISTA/lista.h"
+
+1729834659 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\config\config.c
+	"config.h"
+
+1729834659 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\config\config.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1729834659 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_cola\cola.c
+	"cola.h"
+
+1729834659 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_cola\cola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../comun.h"
+
+1729865826 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_lista\lista.c
+	"lista.h"
+
+1729881168 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\main.c
+	"turno.h"
+	"LIBS/TDA_COLA/cola.h"
+	"LIBS/ARCHIVO/archivo.h"
+
+1729880746 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\turno.h
+	<windows.h>
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<conio.h>
+	"LIBS/CONFIG/config.h"
+	"LIBS/ARCHIVO/archivo.h"
+	"LIBS/VALIDACION_RESP/validacionResp.h"
+	"LIBS/TDA_LISTA/lista.h"
+	"LIBS/API/api.h"
+	"estructuras.h"
+
+1729881382 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\turno.c
+	"turno.h"
+
+1729881245 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\api\api.c
+	"api.h"
+
+1729882302 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\api\api.h
+	<stdio.h>
+	<stdlib.h>
+	<curl/curl.h>
 
