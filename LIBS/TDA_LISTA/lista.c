@@ -266,3 +266,13 @@ int insertarOrdenado(tLista* l, void* dato, unsigned cantBytes, Cmp cmp, bool du
 //
 //    return 1;
 //}
+
+int contarNodos(tLista *lista) {
+    int cont = 0;
+    tNodo *actual = *lista;
+    while (actual) {
+        cont++;
+        actual = actual->sig;
+    }
+    return cont;
+}
