@@ -9,6 +9,7 @@ int cargarConfig(const char *archivo_config, tConfig *configs, unsigned cant_con
     /**
        Primero tiene que mostrar las configuraciones y luego el usuario debe elegir
     */
+
     i = 0;
     pf_config = fopen(archivo_config, "rt");
     if (!pf_config)

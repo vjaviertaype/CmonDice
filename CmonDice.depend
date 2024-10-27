@@ -368,3 +368,121 @@
 	"../../estructuras.h"
 	"../TDA_LISTA/lista.h"
 
+1729996714 source:c:\users\thomas\documents\github\cmondice\libs\api\api.c
+	"api.h"
+
+1729996714 c:\users\thomas\documents\github\cmondice\libs\api\api.h
+	<stdio.h>
+	<stdlib.h>
+	<curl/curl.h>
+
+1729996714 source:c:\users\thomas\documents\github\cmondice\libs\archivo\archivo.c
+	"archivo.h"
+
+1729996714 c:\users\thomas\documents\github\cmondice\libs\archivo\archivo.h
+	<stdio.h>
+	<stdlib.h>
+	"../comun.h"
+	"../TDA_LISTA/lista.h"
+	"../../estructuras.h"
+
+1729996735 c:\users\thomas\documents\github\cmondice\libs\comun.h
+	<time.h>
+
+1729996714 c:\users\thomas\documents\github\cmondice\libs\tda_lista\lista.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<unistd.h>
+	<windows.h>
+	"../comun.h"
+
+1729996714 c:\users\thomas\documents\github\cmondice\estructuras.h
+
+1729996735 source:c:\users\thomas\documents\github\cmondice\libs\comun.c
+	"comun.h"
+	"TDA_LISTA/lista.h"
+
+1730004147 source:c:\users\thomas\documents\github\cmondice\libs\config\config.c
+	"config.h"
+
+1729996735 c:\users\thomas\documents\github\cmondice\libs\config\config.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1729996714 source:c:\users\thomas\documents\github\cmondice\libs\sortear_jug\sortearjugadores.c
+	"sortearJugadores.h"
+
+1729996714 c:\users\thomas\documents\github\cmondice\libs\sortear_jug\sortearjugadores.h
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"../../estructuras.h"
+	"../TDA_LISTA/lista.h"
+
+1729996714 source:c:\users\thomas\documents\github\cmondice\libs\tda_cola\cola.c
+	"cola.h"
+
+1729996714 c:\users\thomas\documents\github\cmondice\libs\tda_cola\cola.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../comun.h"
+
+1729996714 source:c:\users\thomas\documents\github\cmondice\libs\tda_lista\lista.c
+	"lista.h"
+
+1729996714 source:c:\users\thomas\documents\github\cmondice\libs\validacion_resp\validacionresp.c
+	"validacionResp.h"
+
+1729996714 c:\users\thomas\documents\github\cmondice\libs\validacion_resp\validacionresp.h
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"../TDA_LISTA/lista.h"
+
+1730004243 source:c:\users\thomas\documents\github\cmondice\turno.c
+	"turno.h"
+
+1729996735 c:\users\thomas\documents\github\cmondice\turno.h
+	<windows.h>
+	<time.h>
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	<conio.h>
+	"LIBS/CONFIG/config.h"
+	"LIBS/ARCHIVO/archivo.h"
+	"LIBS/VALIDACION_RESP/validacionResp.h"
+	"LIBS/TDA_LISTA/lista.h"
+	"LIBS/API/api.h"
+	"estructuras.h"
+
+1730006912 source:c:\users\thomas\documents\github\cmondice\main.c
+	"turno.h"
+	"LIBS/TDA_COLA/cola.h"
+	"LIBS/ARCHIVO/archivo.h"
+	"LIBS/SORTEAR_JUG/sortearJugadores.h"
+	"LIBS/MENU/menu.h"
+
+1730007574 c:\users\thomas\documents\github\cmondice\libs\menu\menu.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<windows.h>
+	"../CONFIG/config.h"
+	"../ARCHIVO/archivo.h"
+	"../VALIDACION_RESP/validacionResp.h"
+	"../TDA_LISTA/lista.h"
+	"../TDA_COLA/cola.h"
+	"../API/api.h"
+	"../../estructuras.h"
+	"../SORTEAR_JUG/sortearJugadores.h"
+	"../../turno.h"
+
+1730005820 source:c:\users\thomas\documents\github\cmondice\libs\menu\menu.c
+	"menu.h"
+

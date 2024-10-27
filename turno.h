@@ -15,6 +15,7 @@
 #include "LIBS/TDA_LISTA/lista.h"
 #include "LIBS/API/api.h"
 #include "estructuras.h"
+#include "LIBS/MENU/menu.h"
 
 /**FUNCION PRINCIPAL QUE GESTIONA EL TURNO DE CADA JUGADOR*/
 int turnoJugador(FILE *info, tJugador* jugador_actual, tConfig config_partida, CURL*curl, const char*url);

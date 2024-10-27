@@ -2,6 +2,7 @@
 
 int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida, CURL *curl, const char*url)
 {
+
     //Se inicializan los parametros que se usaran para registrar los movimientos del jugador
     tRonda ronda_juego = {config_partida.cant_vidas, 0, 0};
 
@@ -30,6 +31,7 @@ int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida, CU
     generarSecuencia(&l_sec, curl, url);
 
     //Una vez generada la secuencia se muestra en pantalla el tiempo que indique la configuracion de partida
+    mostrarTitulo();
     puts("Se muestra secuencia : ");
 
     //Funcion de lista que muestra una lista x tiempo. Si se manda 0 como tiempo de muestra, se mostrara la lista en consola sin limite de tiempo.
@@ -37,7 +39,7 @@ int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida, CU
 
     //Se inicializa una bandera para seguir jugando
     int seguir_jugando = 1;
-
+    mostrarTitulo();
     puts("Ingrese su respuesta : ");
 
     while(seguir_jugando)
@@ -71,7 +73,10 @@ int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida, CU
         {
             if(resp == RESPUESTA_CORRECTA)
             {
+                puts("\n");
+                printf("\033[1;32m"); // Verde y en negrita
                 puts("RESPUESTA CORRECTA");
+                printf("\033[0;37m"); // Blanco normal
                 pausa();
                 respuestaCorrecta(info, jugador_actual, &l_sec, &l_resp, &ronda_juego);
 
@@ -85,7 +90,10 @@ int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida, CU
             }
             else if(resp == RESPUESTA_INCORRECTA)
             {
+                puts("\n");
+                printf("\033[1;31m");
                 puts("RESPUESTA INCORRECTA");
+                printf("\033[0;37m"); // Blanco normal
                 pausa();
                 respuestaIncorrecta(info, &l_sec, &l_resp, &ronda_juego, cant_caracteres_resp);
 
@@ -257,10 +265,11 @@ void limpiarBufferTeclado()
 void mostrarRonda(int ronda)
 {
     limpiarPantalla();
-    printf("*************************\n");
-    printf("***** R O N D A - %d *****\n",ronda);
-    printf("*************************\n");
-    Sleep(250);
+    mostrarTitulo();
+    puts("\n");
+    printf("*********************************** R O N D A - %d *****************************\n",ronda);
+
+    Sleep(2000);
     limpiarPantalla();
 }
 
@@ -341,19 +350,41 @@ void contarCantidad(void* e, void* contexto)
 
 void mostrarCaracter(void* e)
 {
-    printf("%c", *((char*)e) );
+
+    if (*((char*)e) == 'R')
+    {
+       printf("\033[1;31m");
+        printf("%c", *((char*)e) );
+    }
+   if  (*((char*)e) == 'V')
+    {
+      printf("\033[1;32m");
+        printf("%c", *((char*)e) );
+    }
+    if (*((char*)e) == 'N')
+    {
+       printf("\033[1;33m");
+        printf("%c", *((char*)e) );
+    }
+     if (*((char*)e) == 'A')
+    {
+      printf("\033[1;33m");
+        printf("%c", *((char*)e) );
+    }
+
+    printf("\033[0;37m");
 }
 
-void limpiarPantalla()
-{
-#ifdef _WIN32
-    /// Si es Windows
-    system("cls");  /// Limpia la pantalla en Windows
-#else
-    /// Para Linux y otros sistemas POSIX
-    system("clear"); /// Limpia la pantalla en Linux
-#endif
-}
+//void limpiarPantalla()
+//{
+//#ifdef _WIN32
+//    /// Si es Windows
+//    system("cls");  /// Limpia la pantalla en Windows
+//#else
+//    /// Para Linux y otros sistemas POSIX
+//    system("clear"); /// Limpia la pantalla en Linux
+//#endif
+//}
 
 void pausa()
 {
