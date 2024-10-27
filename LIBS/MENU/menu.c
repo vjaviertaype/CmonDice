@@ -1,4 +1,5 @@
 #include "menu.h"
+
 int menuPrincipal(CURL *curl)
 {
     limpiarPantalla();
@@ -119,26 +120,21 @@ void mostrarInstrucciones(CURL*curl)
     volverAtras(curl);
 }
 
-void limpiarPantalla()
-{
-#ifdef _WIN32
-    system("cls"); // Limpia la pantalla en Windows
-#else
-    system("clear"); // Limpia la pantalla en Linux
-#endif
-}
-
 int jugar(CURL *curl)
 {
 
     tLista jugadores, tabla;
     tJugador jugador_actual;
-    int cant_jugadores, i;
-    tConfig vec[3];
+    int cant_jugadores, i, config_seleccionada;
+    tConfig configuraciones[CANT_MAX_CONFIG];
     FILE *informe;
     crearLista(&jugadores);
     crearLista(&tabla);
-    cargarConfig(NOMBRE_CONFIG, vec, 3);
+
+    cargarConfig(NOMBRE_CONFIG, configuraciones, 3);
+
+    config_seleccionada = seleccionaConfigIndice(configuraciones,CANT_MAX_CONFIG);
+
     informe = inicializarInforme("informe_loco");
 
 
@@ -152,7 +148,7 @@ int jugar(CURL *curl)
             mostrarTurnoJugador(&jugador_actual);
 
             generarCabeceraJugador(informe, i, jugador_actual.nombre_jugador);
-            turnoJugador(informe, &jugador_actual, vec[DIFICULTAD_SELECCIONADA], curl, URL);
+            turnoJugador(informe, &jugador_actual, configuraciones[config_seleccionada], curl, URL);
             printf("Puntos de %s : %d\n", jugador_actual.nombre_jugador, jugador_actual.puntos);
             fprintf(informe, "Puntaje Final: %d\n", jugador_actual.puntos);
             pausa();
