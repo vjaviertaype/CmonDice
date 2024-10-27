@@ -15,7 +15,7 @@ int cargarConfig(const char *archivo_config, tConfig *configs, unsigned cant_con
                   &buffer.tiempo_muestra,
                   &buffer.tiempo_turno,
                   &buffer.cant_vidas) == 4 &&
-            i < cant_configs)
+           i < cant_configs)
     {
         if (validarConfig(&buffer) == TODO_OK)
         {
@@ -38,19 +38,19 @@ int validarConfig(tConfig *config)
 
     return TODO_OK;
 }
-void mostrarConfig(int pos,tConfig *config)
+void mostrarConfig(int pos, tConfig *config)
 {
     printf("| %-6d | %-5c | %-10d | %-12d | %-12d |\n",
-         pos,
-         config->nivel,
-         config->tiempo_muestra,
-         config->tiempo_turno,
-         config->cant_vidas);
+           pos,
+           config->nivel,
+           config->tiempo_muestra,
+           config->tiempo_turno,
+           config->cant_vidas);
 }
 
 int seleccionaConfigIndice(tConfig *vec, unsigned tam)
 {
-    int i,indice = -1;
+    int i, indice = -1;
 
     limpiarPantalla();
 
@@ -69,10 +69,10 @@ int seleccionaConfigIndice(tConfig *vec, unsigned tam)
     {
         limpiarBufferTeclado();
         printf("Ingrese un Indice para seleccionar configuracion del juego: ");
-        scanf("%d",&indice);
-        if(indice <= 0 || indice > tam) printf("Fuera de rango.\nPor favor elija un indice entre 1 y %d: ",tam);
-    }
-    while(indice <= 0 || indice > tam);
+        scanf("%d", &indice);
+        if (indice <= 0 || indice > tam)
+            printf("Fuera de rango.\nPor favor elija un indice entre 1 y %d: ", tam);
+    } while (indice <= 0 || indice > tam);
 
     return --indice;
 }
