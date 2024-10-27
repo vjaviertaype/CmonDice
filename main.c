@@ -1,9 +1,10 @@
 #include "turno.h"
 #include "LIBS/TDA_COLA/cola.h"
 #include "LIBS/ARCHIVO/archivo.h"
+#include "LIBS/CONFIG/config.h"
 #include "LIBS/SORTEAR_JUG/sortearJugadores.h"
 
-#define DIFICULTAD_SELECCIONADA 1
+#define CANT_MAX_CONFIG 3
 #define NOMBRE_CONFIG "config.txt"
 
 void mostrarInstrucciones();
@@ -28,10 +29,10 @@ Tareas:
 int main()
 {
     FILE *informe;
-    tConfig vec[3];
+    tConfig vec[CANT_MAX_CONFIG];
     tLista jugadores, tabla;
     tJugador jugador_actual;
-    int cant_jugadores, i;
+    int cant_jugadores, i,config_seleccionada;
 
     ///Integracion de libreria API
     CURL *curl;
@@ -40,12 +41,18 @@ int main()
 
     crearLista(&jugadores);
     crearLista(&tabla);
-    mostrarInstrucciones();
 
-    cargarConfig(NOMBRE_CONFIG, vec, 3);
+    mostrarInstrucciones();
+    cargarConfig(NOMBRE_CONFIG, vec, CANT_MAX_CONFIG);
+
+    config_seleccionada = seleccionaConfigIndice(vec,CANT_MAX_CONFIG);
+
+    mostrarConfig(config_seleccionada,vec + config_seleccionada);
     pausa();
 
     informe = inicializarInforme("informe_loco");
+
+
 
     if ((cant_jugadores = ingresoDeJugadores(&jugadores)) > 0)
     {
@@ -57,7 +64,7 @@ int main()
             mostrarJugador(&jugador_actual);
 
             generarCabeceraJugador(informe, i, jugador_actual.nombre_jugador);
-            turnoJugador(informe, &jugador_actual, vec[DIFICULTAD_SELECCIONADA], curl, url);
+            turnoJugador(informe, &jugador_actual, vec[config_seleccionada], curl, url);
             printf("Puntos de %s : %d\n", jugador_actual.nombre_jugador, jugador_actual.puntos);
             fprintf(informe, "Puntaje Final: %d\n", jugador_actual.puntos);
 

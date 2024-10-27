@@ -1,6 +1,8 @@
 #ifndef CONFIG_H_INCLUDED
 #define CONFIG_H_INCLUDED
 
+#include "../comun.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -22,5 +24,6 @@ typedef struct
 
 int cargarConfig(const char *, tConfig *, unsigned);
 int validarConfig(tConfig *);
-void mostrarConfig(tConfig *);
+void mostrarConfig(int, tConfig *);
+int seleccionaConfigIndice(tConfig *, unsigned);
 #endif // CONFIG_H_INCLUDED

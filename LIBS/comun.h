@@ -2,6 +2,7 @@
 #define COMUN_H_INCLUDED
 
 #include <time.h>
+#include <windows.h>
 
 #define minimo(X, Y) ( (X) <= (Y)?(X):(Y) )
 
@@ -18,5 +19,11 @@ typedef void (*Accion)(void* e, void* contexto);
 typedef void (*Mostrar)(void* e);
 
 void obtenerFechaDeAhora(char *buffer, unsigned tam);
+
+/// limpieza de I/O
+void limpiarBufferTeclado();
+void limpiarPantalla();
+/// pausa de terminal
+void pausa();
 
 #endif // COMUN_H_INCLUDED
