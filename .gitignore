@@ -10,3 +10,4 @@ obj/
 # Si quieren cambiar la cabezera/prefijo de los informes no se olviden agregarlo aqui.
 # formato: prefijo_*.txt
 informe_*.txt
+/.vscode

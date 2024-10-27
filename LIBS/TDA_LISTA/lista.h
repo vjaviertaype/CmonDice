@@ -36,4 +36,6 @@ int listasIguales(tLista* l_sec, tLista* l_resp,Cmp cmp);
 
 int insertarOrdenado(tLista* l, void* dato, unsigned cantBytes, Cmp cmp, bool duplicado, bool ordenAsc);
 
+int contarNodos(tLista *lista);
+
 #endif // LISTA_H_INCLUDED

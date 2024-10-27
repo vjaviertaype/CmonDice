@@ -1,10 +1,10 @@
 #include "turno.h"
 #include "LIBS/TDA_COLA/cola.h"
 #include "LIBS/ARCHIVO/archivo.h"
+#include "LIBS/SORTEAR_JUG/sortearJugadores.h"
 
 #define DIFICULTAD_SELECCIONADA 1
 #define NOMBRE_CONFIG "config.txt"
-
 
 void mostrarInstrucciones();
 int ingresoDeJugadores(tLista *);
@@ -49,6 +49,8 @@ int main()
 
     if ((cant_jugadores = ingresoDeJugadores(&jugadores)) > 0)
     {
+        //Se sortea lista dejugadores
+        sortearJugadores(&jugadores);
         for (i = 1; i <= cant_jugadores; i++)
         {
             sacarPrimeroLista(&jugadores, &jugador_actual, sizeof(tJugador));
@@ -100,7 +102,7 @@ int ingresoDeJugadores(tLista *l)
 
     while (menuIngresoJugador(&jugadorAux) == TODO_OK)
     {
-        ponerAlComienzo(l, &jugadorAux, sizeof(tJugador));
+        ponerAlFinal(l, &jugadorAux, sizeof(tJugador));
         cant_jugadores++;
     }
 

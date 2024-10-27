@@ -43,6 +43,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LIBS/CONFIG/config.h" />
+		<Unit filename="LIBS/SORTEAR_JUG/sortearJugadores.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LIBS/SORTEAR_JUG/sortearJugadores.h" />
 		<Unit filename="LIBS/TDA_COLA/cola.c">
 			<Option compilerVar="CC" />
 		</Unit>
