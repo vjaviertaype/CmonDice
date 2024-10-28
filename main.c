@@ -25,7 +25,10 @@ int main()
     menuPrincipal(curl);
 
 
+<<<<<<< Updated upstream
     pausa();
+=======
+>>>>>>> Stashed changes
 
     limpia_y_cierra_api(curl);
 

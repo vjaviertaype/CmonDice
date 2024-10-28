@@ -1,16 +1,19 @@
 #include "sortearJugadores.h"
 
 
-tNodo* obtenerNodoEnIndice(tLista *lista, int indice) {
+tNodo* obtenerNodoEnIndice(tLista *lista, int indice)
+{
     tNodo *actual = *lista;
-    for (int i = 0; i < indice && actual != NULL; i++) {
+    for (int i = 0; i < indice && actual != NULL; i++)
+    {
         actual = actual->sig;
     }
     return actual;
 }
 
 
-int sortearJugadores(tLista *lista) {
+int sortearJugadores(tLista *lista)
+{
     int totalNodos = contarNodos(lista);
     int i, indiceAleatorio;
     tNodo *actual, *nodoAleatorio;
@@ -22,7 +25,8 @@ int sortearJugadores(tLista *lista) {
     temp = malloc(actual->tamInfo);
     if (!temp) return 0;
 
-    for (i = 0; i < totalNodos - 1; i++) {
+    for (i = 0; i < totalNodos - 1; i++)
+    {
         indiceAleatorio = i + rand() % (totalNodos - i);
         nodoAleatorio = obtenerNodoEnIndice(lista, indiceAleatorio);
 

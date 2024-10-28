@@ -65,8 +65,12 @@ int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida, CU
             guardarRonda(info,&ronda_juego,&l_sec,&l_resp);
 
             limpiarPantalla();
-            puts("NO TIENE MAS VIDAS");
+            mostrarTitulo();
+             printf("\033[1;31m");
+             puts("NO TIENE MAS VIDAS");
             puts("\nGAME OVER\n");
+            printf("\033[0;37m"); // Blanco normal
+
             seguir_jugando = 0;
         }
         else
@@ -84,6 +88,7 @@ int turnoJugador(FILE *info,tJugador* jugador_actual, tConfig config_partida, CU
                 mostrarRonda(++ronda);
                 config_partida.tiempo_turno++;
                 generarSecuencia(&l_sec, curl, url);
+                mostrarTitulo();
                 puts("Se muestra Secuencia :");
                 mostrarSecuenciaXTiempo(&l_sec, config_partida.tiempo_muestra, mostrarCaracter);
                 puts("Ingrese su respuesta :");
@@ -150,6 +155,7 @@ void noContesta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, u
     ronda_juego->vidas_consumidas++;
 
     //...y se le vuelve a mostrar la secuencia
+    mostrarTitulo();
     puts("Se consumio una vida, la secuencia se mostrara nuevamente");
     mostrarSecuenciaXTiempo(l_sec, tiempo_muestra, mostrarCaracter);
     puts("Vuelva a escribir su respuesta : ");
@@ -158,7 +164,7 @@ void noContesta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, u
 void usoCaracterEspecial(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, unsigned tiempo_muestra,int cant_car_resp)
 {
     limpiarPantalla();
-
+    mostrarTitulo();
     int vidas_a_usar;
 
     //
@@ -202,6 +208,7 @@ void usoCaracterEspecial(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda
 void respuestaIncorrecta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, int cant_car_resp)
 {
     limpiarPantalla();
+    mostrarTitulo();
 
     int vidas_a_usar;
 
@@ -214,8 +221,15 @@ void respuestaIncorrecta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda
     ///Funcion de lista que elimina los ultimos n elementos de la lista
     eliminarNUltimos(l_resp, sizeof(char), vidas_a_usar);
 
+<<<<<<< Updated upstream
     if( cant_car_resp == vidas_a_usar )
+=======
+    if (cant_car_resp == vidas_a_usar)
+    {
+        mostrarTitulo();
+>>>>>>> Stashed changes
         puts("Vuelva a poner su respuesta : ");
+    }
     else
     {
         puts("Complete la respuesta :");
@@ -266,8 +280,19 @@ void mostrarRonda(int ronda)
 {
     limpiarPantalla();
     mostrarTitulo();
+<<<<<<< Updated upstream
     puts("\n");
     printf("*********************************** R O N D A - %d *****************************\n",ronda);
+=======
+    puts("\n\n");
+    printf("\033[1;31m                                      R ");
+    printf("\033[1;32mO ");
+    printf("\033[1;34mN ");
+    printf("\033[1;33mD ");
+    printf("\033[1;35mA ");
+    printf("\033[0m %d",ronda);
+
+>>>>>>> Stashed changes
 
     Sleep(2000);
     limpiarPantalla();
@@ -327,7 +352,7 @@ int cuantasVidasUsar(int min, int max)
 {
     int vidas;
 
-    printf("Solo puede usar un maximo de %d vidas....Cuantas quiere usar ? : ", max);
+    printf("\nSolo puede usar un maximo de %d vidas....Cuantas quiere usar ? : ", max);
     do
     {
         limpiarBufferTeclado();

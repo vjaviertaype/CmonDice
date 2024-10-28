@@ -20,7 +20,7 @@ int cargarConfig(const char *archivo_config, tConfig *configs, unsigned cant_con
                   &buffer.tiempo_muestra,
                   &buffer.tiempo_turno,
                   &buffer.cant_vidas) == 4 &&
-           i < cant_configs)
+            i < cant_configs)
     {
         if (validarConfig(&buffer) == TODO_OK)
         {
@@ -46,9 +46,52 @@ int validarConfig(tConfig *config)
 }
 void mostrarConfig(tConfig *config)
 {
+<<<<<<< Updated upstream
     printf("Nivel de dificultad: %c\nTiempo de Muestra: %u\nTiempo por turno: %u\nCantidad de Vidas: %u\n",
            config->nivel,
            config->tiempo_muestra,
            config->tiempo_turno,
            config->cant_vidas);
 }
+=======
+    int i;
+    int pos = 1;
+
+    for (i = 0; i < CANT_MAX_CONFIG; i++)
+    {
+        printf("| Indice | Nivel | T. Muestra | T. Respuesta | Cant. Vidas  |\n");
+        printf("+--------+-------+------------+--------------+--------------+\n");
+        printf("| %-6d | %-5c | %-10d | %-12d | %-12d |\n",
+               pos,
+               config->nivel,
+               config->tiempo_muestra,
+               config->tiempo_turno,
+               config->cant_vidas);
+        printf("+--------+-------+------------+--------------+--------------+\n");
+        config++;
+        pos++;
+    }
+
+
+}
+
+int seleccionaConfigIndice(tConfig *vec)
+{
+    int indice = -1;
+
+    limpiarPantalla();
+    mostrarConfig(vec);
+
+    do
+    {
+        limpiarBufferTeclado();
+        printf("\nIngrese un Indice para seleccionar configuracion del juego: ");
+        scanf("%d", &indice);
+        if (indice <= 0 || indice > CANT_MAX_CONFIG)
+            printf("\nFuera de rango.\nPor favor elija un indice entre 1 y %d: ", CANT_MAX_CONFIG);
+    }
+    while (indice <= 0 || indice > CANT_MAX_CONFIG);
+
+    return --indice;
+}
+>>>>>>> Stashed changes

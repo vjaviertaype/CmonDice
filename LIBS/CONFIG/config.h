@@ -14,13 +14,20 @@
 
 typedef struct
 {
-  char nivel; // F = fácil, N = normal, D = difícil
-  unsigned int tiempo_muestra;
-  unsigned int tiempo_turno;
-  unsigned cant_vidas;
+    char nivel; // F = fácil, N = normal, D = difícil
+    unsigned int tiempo_muestra;
+    unsigned int tiempo_turno;
+    unsigned cant_vidas;
 } tConfig;
 
 int cargarConfig(const char *, tConfig *, unsigned);
 int validarConfig(tConfig *);
 void mostrarConfig(tConfig *);
+<<<<<<< Updated upstream
+=======
+int seleccionaConfigIndice(tConfig *);
+
+#include "../MENU/menu.h"
+
+>>>>>>> Stashed changes
 #endif // CONFIG_H_INCLUDED

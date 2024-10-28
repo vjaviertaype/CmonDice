@@ -386,8 +386,9 @@
 	"../TDA_LISTA/lista.h"
 	"../../estructuras.h"
 
-1729996735 c:\users\thomas\documents\github\cmondice\libs\comun.h
+1730125083 c:\users\thomas\documents\github\cmondice\libs\comun.h
 	<time.h>
+	<windows.h>
 
 1729996714 c:\users\thomas\documents\github\cmondice\libs\tda_lista\lista.h
 	<stdio.h>
@@ -400,14 +401,15 @@
 
 1729996714 c:\users\thomas\documents\github\cmondice\estructuras.h
 
-1729996735 source:c:\users\thomas\documents\github\cmondice\libs\comun.c
+1730125083 source:c:\users\thomas\documents\github\cmondice\libs\comun.c
 	"comun.h"
 	"TDA_LISTA/lista.h"
 
-1730004147 source:c:\users\thomas\documents\github\cmondice\libs\config\config.c
+1730125098 source:c:\users\thomas\documents\github\cmondice\libs\config\config.c
 	"config.h"
 
-1729996735 c:\users\thomas\documents\github\cmondice\libs\config\config.h
+1730125083 c:\users\thomas\documents\github\cmondice\libs\config\config.h
+	"../comun.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -432,7 +434,7 @@
 	<string.h>
 	"../comun.h"
 
-1729996714 source:c:\users\thomas\documents\github\cmondice\libs\tda_lista\lista.c
+1730128236 source:c:\users\thomas\documents\github\cmondice\libs\tda_lista\lista.c
 	"lista.h"
 
 1729996714 source:c:\users\thomas\documents\github\cmondice\libs\validacion_resp\validacionresp.c
@@ -444,11 +446,10 @@
 	<ctype.h>
 	"../TDA_LISTA/lista.h"
 
-1730004243 source:c:\users\thomas\documents\github\cmondice\turno.c
+1730129348 source:c:\users\thomas\documents\github\cmondice\turno.c
 	"turno.h"
 
-1729996735 c:\users\thomas\documents\github\cmondice\turno.h
-	<windows.h>
+1730125098 c:\users\thomas\documents\github\cmondice\turno.h
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -460,15 +461,17 @@
 	"LIBS/TDA_LISTA/lista.h"
 	"LIBS/API/api.h"
 	"estructuras.h"
+	"LIBS/MENU/menu.h"
 
-1730006912 source:c:\users\thomas\documents\github\cmondice\main.c
+1730125527 source:c:\users\thomas\documents\github\cmondice\main.c
 	"turno.h"
 	"LIBS/TDA_COLA/cola.h"
 	"LIBS/ARCHIVO/archivo.h"
+	"LIBS/CONFIG/config.h"
 	"LIBS/SORTEAR_JUG/sortearJugadores.h"
 	"LIBS/MENU/menu.h"
 
-1730007574 c:\users\thomas\documents\github\cmondice\libs\menu\menu.h
+1730125098 c:\users\thomas\documents\github\cmondice\libs\menu\menu.h
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -483,6 +486,6 @@
 	"../SORTEAR_JUG/sortearJugadores.h"
 	"../../turno.h"
 
-1730005820 source:c:\users\thomas\documents\github\cmondice\libs\menu\menu.c
+1730125824 source:c:\users\thomas\documents\github\cmondice\libs\menu\menu.c
 	"menu.h"
 
