@@ -1,45 +1,54 @@
 #include "menu.h"
 int menuPrincipal(CURL *curl)
 {
-    tConfig configuraciones[CANT_MAX_CONFIG];
-    cargarConfig(NOMBRE_CONFIG, configuraciones, 3);
     const char *options[] = {"Instrucciones", "Jugar", "Ver dificultades","Desarrolladores", "Salir"};
+    int continuar = 1;
     int numOptions = sizeof(options) / sizeof(options[0]);
     int selectedOption;
+    tConfig configuraciones[CANT_MAX_CONFIG];
 
-    limpiarPantalla();
-    selectedOption = menuSeleccionable(options,numOptions);
+    cargarConfig(NOMBRE_CONFIG, configuraciones, CANT_MAX_CONFIG);
 
-     switch (selectedOption)
+    do
+    {
+        limpiarPantalla();
+        selectedOption = menuSeleccionable(options,numOptions);
+
+        switch (selectedOption)
         {
         case 0:
-            mostrarInstrucciones(curl);
-            volverAtras(curl);
+            mostrarInstrucciones();
+            volverAtras();
             break;
         case 1:
             jugar(curl);
             break;
         case 2:
-            verDificultad(curl,configuraciones);
-            volverAtras(curl);
+            verDificultad(configuraciones);
+            volverAtras();
             break;
         case 3:
-            desarrolladores(curl);
+            desarrolladores();
+            volverAtras();
             break;
+        case 4:
         case ESCAPE:
             puts("Saliendo del juego...\n");
-            pausa();
+            continuar = 0;
         }
 
+    }
+    while(continuar);
 
     return 0;
 }
 
-int menuSeleccionable(const char *options[], int numOptions){
+int menuSeleccionable(const char *options[], int numOptions)
+{
 
-  int key;
- int selectedOption = 0;
- do
+    int key;
+    int selectedOption = 0;
+    do
     {
         displayMenu(options, numOptions, selectedOption);
         key = _getch(); // Captura la tecla
@@ -57,7 +66,8 @@ int menuSeleccionable(const char *options[], int numOptions){
             }
         }
 
-    } while(key != '\r' && key != ESCAPE);
+    }
+    while(key != '\r' && key != ESCAPE);
 
     if (key == ESCAPE) return ESCAPE;
     return selectedOption;
@@ -88,7 +98,7 @@ void displayMenu(const char *options[], int numOptions, int selectedOption)
     }
 }
 
-void mostrarInstrucciones(CURL*curl)
+void mostrarInstrucciones()
 {
     limpiarPantalla();
 
@@ -110,17 +120,6 @@ void mostrarInstrucciones(CURL*curl)
     printf("10. Si te quedas sin vidas, el juego termina.\n");
     printf("\033[1;33m"); // Color amarillo
     printf("\033[0m"); // Restablecer el color
-
-    volverAtras(curl);
-}
-
-void limpiarPantalla()
-{
-#ifdef _WIN32
-    system("cls"); // Limpia la pantalla en Windows
-#else
-    system("clear"); // Limpia la pantalla en Linux
-#endif
 }
 
 int jugar(CURL *curl)
@@ -128,29 +127,16 @@ int jugar(CURL *curl)
 
     tLista jugadores, tabla;
     tJugador jugador_actual;
-<<<<<<< Updated upstream
-    int cant_jugadores, i;
-    tConfig vec[3];
-    FILE *informe;
-    crearLista(&jugadores);
-    crearLista(&tabla);
-    cargarConfig(NOMBRE_CONFIG, vec, 3);
-=======
     int cant_jugadores, i, config_seleccionada;
     FILE *informe;
     crearLista(&jugadores);
     crearLista(&tabla);
-    const char *options[] = {"Volver al menu principal","Salir del juego"};
-    int numOptions = sizeof(options) / sizeof(options[0]);
-    int selectedOption;
 
     tConfig configuraciones[CANT_MAX_CONFIG];
     cargarConfig(NOMBRE_CONFIG, configuraciones, 3);
 
 
     config_seleccionada = seleccionaConfigIndice(configuraciones);
-
->>>>>>> Stashed changes
     informe = inicializarInforme("informe_loco");
 
 
@@ -164,13 +150,8 @@ int jugar(CURL *curl)
             mostrarTurnoJugador(&jugador_actual);
 
             generarCabeceraJugador(informe, i, jugador_actual.nombre_jugador);
-<<<<<<< Updated upstream
-            turnoJugador(informe, &jugador_actual, vec[DIFICULTAD_SELECCIONADA], curl, URL);
-            printf("Puntos de %s : %d\n", jugador_actual.nombre_jugador, jugador_actual.puntos);
-=======
             turnoJugador(informe, &jugador_actual, configuraciones[config_seleccionada], curl, URL);
             printf("Puntos de %s : %d\n\n", jugador_actual.nombre_jugador, jugador_actual.puntos);
->>>>>>> Stashed changes
             fprintf(informe, "Puntaje Final: %d\n", jugador_actual.puntos);
             pausa();
             insertarOrdenado(&tabla, &jugador_actual, sizeof(tJugador), compararPuntajeJugador, true, false);
@@ -181,18 +162,21 @@ int jugar(CURL *curl)
         return ERROR_FATAL;
     }
 
+    mostrarSecuencia(&tabla,mostrarJugador);
+    pausa();
     finalizarInforme(informe, &tabla, compararEnteros);
 
     vaciarLista(&jugadores);
     vaciarLista(&tabla);
 
-    selectedOption = menuSeleccionable(options,numOptions);
-
-    if (selectedOption == 0){
-    menuPrincipal(curl);
-    }
-
     return 1;
+}
+
+void mostrarJugador(void *e)
+{
+    tJugador *j = e;
+
+    printf("%s - %d\n",j->nombre_jugador,j->puntos);
 }
 
 int ingresoDeJugadores(tLista *l)
@@ -219,6 +203,7 @@ int menuIngresoJugador(tJugador *pj,int num_jugador)
     printf("\033[1;31m"); // Rojo y negrita
     printf("Jugador numero %d: ",num_jugador +1);
     printf("\033[0m"); // Restablecer el color
+    limpiarBufferTeclado();
     scanf("%s", pj->nombre_jugador);
     pj->puntos = 0;
 
@@ -272,13 +257,13 @@ void mostrarTitulo()
 
 }
 
-void desarrolladores(CURL*curl)
+void desarrolladores()
 {
     limpiarPantalla();
 
     printf("\033[1;32m"); // Verde y en negrita
     puts("Juego desarrollado para la materia Algoritmos Y Etructuras de Datos de la Universidad Nacional de La Matanza");
-    printf("\033[0;37m"); // Blanco normal
+    printf("\033[0m"); // Blanco normal
     puts("\nDesarrolladores:");
     puts("Gonzalo Mendoza");
     puts("Victor Javier Taype");
@@ -287,21 +272,18 @@ void desarrolladores(CURL*curl)
     puts("Thomas Delli Gatti");
     puts("Victor Beltramino");
     puts("\nDocentes:");
-    puts("Renata Guatelli:");
-    puts("Giselle Rocio Gonzalez:\n");
-
-    volverAtras(curl);
+    puts("Renata Guatelli");
+    puts("Giselle Rocio Gonzalez");
 }
 
-void verDificultad(CURL*curl,tConfig *vec)
+void verDificultad(tConfig *vec)
 {
     limpiarPantalla();
     puts("Las dificultades del juego son: \n\n");
     mostrarConfig(vec);
-    volverAtras(curl);
 }
 
-void volverAtras(CURL* curl)
+void volverAtras()
 {
     int key;
     printf("\n\n> Volver Atras");
@@ -310,5 +292,5 @@ void volverAtras(CURL* curl)
         key = _getch();
     }
     while(key != '\r');
-    menuPrincipal(curl);
 }
+

@@ -18,5 +18,13 @@ typedef void (*Accion)(void* e, void* contexto);
 typedef void (*Mostrar)(void* e);
 
 void obtenerFechaDeAhora(char *buffer, unsigned tam);
+void limpiarBufferTeclado();
+void limpiarPantalla();
+void pause();
+void mostrarTemporizador(unsigned int tiempo);
+void colorearCaracterVerde(char c);
+void colorearCaracterNaranja(char c);
+void colorearCaracterAmarillo(char c);
+void colorearCaracterRojo(char c);
 
 #endif // COMUN_H_INCLUDED

@@ -5,12 +5,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "../comun.h"
 
+
+#define CANT_MAX_CONFIG 3
 #define TODO_OK 1
 #define SIN_MEM -1
 #define ERROR_ARCH -2
 #define EXIT -141
 #define NON_VALID -142
+
 
 typedef struct
 {
@@ -23,11 +27,6 @@ typedef struct
 int cargarConfig(const char *, tConfig *, unsigned);
 int validarConfig(tConfig *);
 void mostrarConfig(tConfig *);
-<<<<<<< Updated upstream
-=======
 int seleccionaConfigIndice(tConfig *);
 
-#include "../MENU/menu.h"
-
->>>>>>> Stashed changes
 #endif // CONFIG_H_INCLUDED

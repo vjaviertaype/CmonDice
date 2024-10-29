@@ -161,33 +161,16 @@ int eliminarNUltimos(tLista* l, unsigned cantBytes, int cantElim)
     return 0;
 }
 
-int mostrarSecuenciaXTiempo(tLista* l, unsigned int tiempo_muestra, Mostrar mostrar)
+int mostrarSecuencia(tLista* l, Mostrar mostrar)
 {
     tNodo** nodo_actual = l;
 
-
-    // Mostrar la secuencia
     while (*nodo_actual)
     {
         mostrar((*nodo_actual)->info);
         nodo_actual = &(*nodo_actual)->sig;
-        Sleep(300); // Cambia esto a `usleep(300000)` si no usas Windows
+        Sleep(300);
     }
-
-    puts("\n");
-    // Mostrar el tiempo transcurrido en un bucle
-    while (tiempo_muestra > 0)
-    {
-        printf("Tiempo restante: %u\n", tiempo_muestra);
-        sleep(1); // Esperar un segundo
-        tiempo_muestra--;
-    }
-
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
 
     return 1;
 }
@@ -243,39 +226,6 @@ int insertarOrdenado(tLista* l, void* dato, unsigned cantBytes, Cmp cmp, bool du
 
     return 1;
 }
-
-//int insertarOrdenado(tLista *l, const void *dato, unsigned cantBytes, Cmp comparar) {
-//    tNodo *nue, *actual, *prev;
-//
-//    prev = actual = *l;
-//    while (actual != NULL && comparar(dato, actual->info) > 0) {
-//        prev = actual;
-//        actual = actual->sig;
-//    }
-//
-//    nue = (tNodo *)malloc(sizeof(tNodo));
-//    if (!nue) {
-//        return 0;
-//    }
-//
-//    nue->info = malloc(cantBytes);
-//    if (!nue->info) {
-//        free(nue);
-//        return 0;
-//    }
-//
-//    memcpy(nue->info, dato, cantBytes);
-//    nue->tamInfo = cantBytes;
-//
-//    nue->sig = actual;
-//    if (prev == NULL) {
-//        *l = nue;
-//    } else {
-//        prev->sig = nue;
-//    }
-//
-//    return 1;
-//}
 
 int contarNodos(tLista *lista)
 {

@@ -27,7 +27,7 @@ void mostrarRonda(int ronda);
     -Solo se le debe pasar como argumento la lista donde se guardara lo que solicite de la api.
     -"Lista* sec_ya_generada" Solo esta para generar los lotes de prueba.
 */
-int generarSecuencia(tLista* sec, CURL*curl, const char*url);
+int generarSecuencia(tLista* sec, CURL *curl, const char*url);
 
 /**Esta funcion sirve para que el jugador ingrese letra por letra su respuesta en la lista en un determinado tiempo */
 int respuestaJugador(tLista* l, unsigned int tiempo_turno);
@@ -37,7 +37,7 @@ void limpiarBufferTeclado();
 /** Funcion para preguntar al usuario cuantas vidas quiere usar.
     -Se mandan como argumentos el rango de vidas disponibles
 */
-int cuantasVidasUsar(int min, int max);
+int cuantasVidasUsar(int maximo);
 
 /**Funciones encargadas de procesar las respuestas :
     -Tambien se le debe pasar el puntero FILE para que se registren los movimientos del turno

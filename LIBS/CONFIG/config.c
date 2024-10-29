@@ -4,13 +4,8 @@ int cargarConfig(const char *archivo_config, tConfig *configs, unsigned cant_con
 {
     FILE *pf_config;
     tConfig buffer;
-    int i;
-    /// TODO: convertir en un seleccionador de linea el archivo de configuracion,
-    /**
-       Primero tiene que mostrar las configuraciones y luego el usuario debe elegir
-    */
+    int i = 0;
 
-    i = 0;
     pf_config = fopen(archivo_config, "rt");
     if (!pf_config)
         return ERROR_ARCH;
@@ -39,21 +34,13 @@ int validarConfig(tConfig *config)
 {
     if (!isalpha(config->nivel) || config->cant_vidas > 5 || config->cant_vidas < 0 || config->tiempo_muestra > 20 || config->tiempo_muestra <= 0 || config->tiempo_turno > 20 || config->tiempo_turno <= 0)
     {
-        return NON_VALID; // cambiar a una contantes de macros.h
+        return 0;
     }
 
     return TODO_OK;
 }
 void mostrarConfig(tConfig *config)
 {
-<<<<<<< Updated upstream
-    printf("Nivel de dificultad: %c\nTiempo de Muestra: %u\nTiempo por turno: %u\nCantidad de Vidas: %u\n",
-           config->nivel,
-           config->tiempo_muestra,
-           config->tiempo_turno,
-           config->cant_vidas);
-}
-=======
     int i;
     int pos = 1;
 
@@ -94,4 +81,3 @@ int seleccionaConfigIndice(tConfig *vec)
 
     return --indice;
 }
->>>>>>> Stashed changes
