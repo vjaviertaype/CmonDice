@@ -1,4 +1,5 @@
 #include "menu.h"
+
 int menuPrincipal(CURL *curl)
 {
     const char *options[] = {"Instrucciones", "Jugar", "Ver dificultades","Desarrolladores", "Salir"};
@@ -89,7 +90,7 @@ void displayMenu(const char *options[], int numOptions, int selectedOption)
     {
         if (i == selectedOption)
         {
-            printf(" > %s\n", options[i]); // Opción seleccionada
+            printf(" > %s\n", options[i]); // OpciÃ³n seleccionada
         }
         else
         {
@@ -128,6 +129,7 @@ int jugar(CURL *curl)
     tLista jugadores, tabla;
     tJugador jugador_actual;
     int cant_jugadores, i, config_seleccionada;
+
     FILE *informe;
     crearLista(&jugadores);
     crearLista(&tabla);
@@ -137,6 +139,7 @@ int jugar(CURL *curl)
 
 
     config_seleccionada = seleccionaConfigIndice(configuraciones);
+
     informe = inicializarInforme("informe_loco");
 
 
@@ -151,7 +154,9 @@ int jugar(CURL *curl)
 
             generarCabeceraJugador(informe, i, jugador_actual.nombre_jugador);
             turnoJugador(informe, &jugador_actual, configuraciones[config_seleccionada], curl, URL);
+
             printf("Puntos de %s : %d\n\n", jugador_actual.nombre_jugador, jugador_actual.puntos);
+
             fprintf(informe, "Puntaje Final: %d\n", jugador_actual.puntos);
             pausa();
             insertarOrdenado(&tabla, &jugador_actual, sizeof(tJugador), compararPuntajeJugador, true, false);
@@ -196,7 +201,7 @@ int ingresoDeJugadores(tLista *l)
 int menuIngresoJugador(tJugador *pj,int num_jugador)
 {
     const char *titulo = "INGRESE NOMBRE DEL JUGADOR (0 PARA FINALIZAR INGRESO)\n\n";
-    int espacioIzquierdo = 10; // Ajusta el espaciado según sea necesario
+    int espacioIzquierdo = 10; // Ajusta el espaciado segÃºn sea necesario
     limpiarPantalla();
     printf("\033[1;34m"); // Color azul y negrita
     printf("%*s%s%*s\n", espacioIzquierdo, "", titulo, espacioIzquierdo, "");
@@ -246,7 +251,7 @@ int compararEnteros(const void *a, const void *b)
 void mostrarTitulo()
 {
     const char *titulo = "CMON DICE";
-    int anchoConsola = 100; // Ajusta según necesites
+    int anchoConsola = 100; // Ajusta segÃºn necesites
     int longitudTitulo = strlen(titulo);
     int espacioIzquierdo = (anchoConsola - longitudTitulo) / 2;
 

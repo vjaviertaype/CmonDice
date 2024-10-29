@@ -13,17 +13,16 @@ void obtenerFechaDeAhora(char *buffer, unsigned tam)
 void limpiarBufferTeclado()
 {
 
-    //fflush(stdin);
     /**fflush solo limpia el buffer de teclado hasta encontrar un salto de linea (\n), Eso significa que
-        ... cualquier cosa despuÈs del primer "\n" permanecer· en el buffer.
+        ... cualquier cosa despu√©s del primer "\n" permanecer√° en el buffer.
         Ejemplo : si el usuario escribio por teclado : "xrty\n\n\nrb\n"
         fflush(stdin) solo borrara "xrty\n", pero en el buffer de teclado seguira quedando "\n\nrb\n"
 
     Para solucionar esto :
-        La librerÌa windows.h proporciona funciones especÌficas para la interacciÛn con el sistema operativo Windows.
+        La librer√≠a windows.h proporciona funciones espec√≠ficas para la interacci√≥n con el sistema operativo Windows.
         En este caso, utilizamos GetStdHandle para obtener el "handle" o manejador del buffer de entrada de la consola (STD_INPUT_HANDLE)
         ... y FlushConsoleInputBuffer para limpiar dicho buffer, eliminando cualquier entrada PENDIENTE que no haya sido procesada.
-        Esto asegura que el buffer estÈ completamente vacÌo antes de solicitar nueva entrada del usuario, evitando errores o lecturas no deseadas.
+        Esto asegura que el buffer est√© completamente vac√≠o antes de solicitar nueva entrada del usuario, evitando errores o lecturas no deseadas.
     */
     HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
     FlushConsoleInputBuffer(hStdin);
@@ -72,7 +71,7 @@ void colorearCaracterVerde(char c) {
 }
 
 void colorearCaracterNaranja(char c) {
-    printf("\033[0;33m");  // MarrÛn claro / Naranja aproximado
+    printf("\033[0;33m");  // Marr√≥n claro / Naranja aproximado
     printf("%c", c);
     printf("\033[0m");
 }
@@ -88,4 +87,3 @@ void colorearCaracterRojo(char c) {
     printf("%c", c);
     printf("\033[0m");
 }
-

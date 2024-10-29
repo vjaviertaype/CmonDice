@@ -194,6 +194,7 @@
 
 1730168462 d:\repos\repos_windows\cmondice\libs\comun.h
 	<time.h>
+	<windows.h>
 
 1730161099 source:d:\repos\repos_windows\cmondice\libs\validacion_resp\validacionresp.c
 	"validacionResp.h"
@@ -628,7 +629,7 @@
 	"../../estructuras.h"
 	"../SORTEAR_JUG/sortearJugadores.h"
 	"../../turno.h"
-
+  
 1730161099 d:\repos\repos_windows\cmondice\libs\sortear_jug\sortearjugadores.h
 	<stdio.h>
 	<stdlib.h>
@@ -638,4 +639,3 @@
 
 1730161099 source:d:\repos\repos_windows\cmondice\libs\sortear_jug\sortearjugadores.c
 	"sortearJugadores.h"
-

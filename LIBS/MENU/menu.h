@@ -3,6 +3,7 @@
 #define NOMBRE_CONFIG "config.txt"
 #define URL "https://www.random.org/integers/?num=1&min=1&max=4&col=1&base=10&format=plain&rnd=new"
 
+
 #include "../comun.h"
 #include "../CONFIG/config.h"
 #include "../ARCHIVO/archivo.h"

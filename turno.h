@@ -1,8 +1,6 @@
 #ifndef TURNO_H_INCLUDED
 #define TURNO_H_INCLUDED
 
-#include <windows.h>// Solo se uso para el manejo del buffer del teclado de consola...investigar si existe otra manera que sea mas estandar
-
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,8 +30,6 @@ int generarSecuencia(tLista* sec, CURL *curl, const char*url);
 /**Esta funcion sirve para que el jugador ingrese letra por letra su respuesta en la lista en un determinado tiempo */
 int respuestaJugador(tLista* l, unsigned int tiempo_turno);
 
-void limpiarBufferTeclado();
-
 /** Funcion para preguntar al usuario cuantas vidas quiere usar.
     -Se mandan como argumentos el rango de vidas disponibles
 */
@@ -51,11 +47,6 @@ void respuestaIncorrecta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda
 void contarCantidad(void* e, void* contexto);
 void mostrarCaracter(void* e);
 
-///Limpia la pantalla
-void limpiarPantalla();
-
-///Hace una pausa
-void pausa();
 
 /** Funcion encargada de hacer el lote de pruebas...luego BORRAR*/
 int generarSecuenciaParaPruebas(tLista* lista);

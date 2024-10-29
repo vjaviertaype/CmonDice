@@ -50,6 +50,7 @@
 	<File name="LIBS\MENU\menu.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="2" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="7613" topLine="184" />
+
 		</Cursor>
 	</File>
 	<File name="LIBS\TDA_LISTA\lista.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="9" zoom_2="0">
@@ -70,6 +71,7 @@
 	<File name="LIBS\ARCHIVO\archivo.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="5" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1453" topLine="49" />
+
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

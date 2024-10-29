@@ -1,6 +1,7 @@
 #include "turno.h"
 #include "LIBS/TDA_COLA/cola.h"
 #include "LIBS/ARCHIVO/archivo.h"
+#include "LIBS/CONFIG/config.h"
 #include "LIBS/SORTEAR_JUG/sortearJugadores.h"
 #include "LIBS/MENU/menu.h"
 
@@ -17,6 +18,3 @@ int main()
 
     return 0;
 }
-
-
-

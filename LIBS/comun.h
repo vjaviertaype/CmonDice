@@ -2,6 +2,7 @@
 #define COMUN_H_INCLUDED
 
 #include <time.h>
+#include <windows.h>
 
 #define minimo(X, Y) ( (X) <= (Y)?(X):(Y) )
 
@@ -26,5 +27,11 @@ void colorearCaracterVerde(char c);
 void colorearCaracterNaranja(char c);
 void colorearCaracterAmarillo(char c);
 void colorearCaracterRojo(char c);
+
+/// limpieza de I/O
+void limpiarBufferTeclado();
+void limpiarPantalla();
+/// pausa de terminal
+void pausa();
 
 #endif // COMUN_H_INCLUDED

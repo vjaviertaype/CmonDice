@@ -5,7 +5,7 @@ int cargarConfig(const char *archivo_config, tConfig *configs, unsigned cant_con
     FILE *pf_config;
     tConfig buffer;
     int i = 0;
-
+  
     pf_config = fopen(archivo_config, "rt");
     if (!pf_config)
         return ERROR_ARCH;
@@ -19,7 +19,6 @@ int cargarConfig(const char *archivo_config, tConfig *configs, unsigned cant_con
     {
         if (validarConfig(&buffer) == TODO_OK)
         {
-            mostrarConfig(&buffer);
             memcpy(configs, &buffer, sizeof(tConfig));
             configs++;
         }
@@ -39,7 +38,7 @@ int validarConfig(tConfig *config)
 
     return TODO_OK;
 }
-void mostrarConfig(tConfig *config)
+void mostrarConfig(int pos, tConfig *config)
 {
     int i;
     int pos = 1;
@@ -78,6 +77,35 @@ int seleccionaConfigIndice(tConfig *vec)
             printf("\nFuera de rango.\nPor favor elija un indice entre 1 y %d: ", CANT_MAX_CONFIG);
     }
     while (indice <= 0 || indice > CANT_MAX_CONFIG);
+
+    return --indice;
+}
+
+int seleccionaConfigIndice(tConfig *vec, unsigned tam)
+{
+    int i, indice = -1;
+
+    limpiarPantalla();
+
+    printf("Configuraciones del Juego\n");
+    printf("+--------+-------+------------+--------------+--------------+\n");
+    printf("| Indice | Nivel | T. Muestra | T. Respuesta | Cant. Vidas  |\n");
+    printf("+--------+-------+------------+--------------+--------------+\n");
+
+    for (i = 0; i < tam; i++)
+    {
+        mostrarConfig(i + 1, vec + i);
+    }
+    printf("+--------+-------+------------+--------------+--------------+\n");
+
+    do
+    {
+        limpiarBufferTeclado();
+        printf("Ingrese un Indice para seleccionar configuracion del juego: ");
+        scanf("%d", &indice);
+        if (indice <= 0 || indice > tam)
+            printf("Fuera de rango.\nPor favor elija un indice entre 1 y %d: ", tam);
+    } while (indice <= 0 || indice > tam);
 
     return --indice;
 }
