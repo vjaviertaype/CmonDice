@@ -161,24 +161,15 @@ int eliminarNUltimos(tLista* l, unsigned cantBytes, int cantElim)
     return 0;
 }
 
-int mostrarSecuenciaXTiempo(tLista* l, unsigned int tiempo_muestra, Mostrar mostrar)
+int mostrarSecuencia(tLista* l, Mostrar mostrar)
 {
     tNodo** nodo_actual = l;
-    while(*nodo_actual)
+
+    while (*nodo_actual)
     {
         mostrar((*nodo_actual)->info);
         nodo_actual = &(*nodo_actual)->sig;
         Sleep(300);
-    }
-
-    if(tiempo_muestra != 0)
-    {
-        sleep(tiempo_muestra);
-#ifdef _WIN32
-        system("cls");
-#else
-        system("clear");
-#endif // _WIN32
     }
 
     return 1;
@@ -208,7 +199,8 @@ int listasIguales(tLista* l_uno,tLista* l_dos,Cmp cmp)
 
 int insertarOrdenado(tLista* l, void* dato, unsigned cantBytes, Cmp cmp, bool duplicado, bool ordenAsc)
 {
-    while (*l && (ordenAsc ? cmp(dato, (*l)->info) > 0 : cmp(dato, (*l)->info) < 0)) {
+    while (*l && (ordenAsc ? cmp(dato, (*l)->info) > 0 : cmp(dato, (*l)->info) < 0))
+    {
         l = &(*l)->sig;
     }
 
@@ -220,7 +212,8 @@ int insertarOrdenado(tLista* l, void* dato, unsigned cantBytes, Cmp cmp, bool du
         return 0;
 
     nue->info = malloc(cantBytes);
-    if (!nue->info) {
+    if (!nue->info)
+    {
         free(nue);
         return 0;
     }
@@ -234,43 +227,12 @@ int insertarOrdenado(tLista* l, void* dato, unsigned cantBytes, Cmp cmp, bool du
     return 1;
 }
 
-//int insertarOrdenado(tLista *l, const void *dato, unsigned cantBytes, Cmp comparar) {
-//    tNodo *nue, *actual, *prev;
-//
-//    prev = actual = *l;
-//    while (actual != NULL && comparar(dato, actual->info) > 0) {
-//        prev = actual;
-//        actual = actual->sig;
-//    }
-//
-//    nue = (tNodo *)malloc(sizeof(tNodo));
-//    if (!nue) {
-//        return 0;
-//    }
-//
-//    nue->info = malloc(cantBytes);
-//    if (!nue->info) {
-//        free(nue);
-//        return 0;
-//    }
-//
-//    memcpy(nue->info, dato, cantBytes);
-//    nue->tamInfo = cantBytes;
-//
-//    nue->sig = actual;
-//    if (prev == NULL) {
-//        *l = nue;
-//    } else {
-//        prev->sig = nue;
-//    }
-//
-//    return 1;
-//}
-
-int contarNodos(tLista *lista) {
+int contarNodos(tLista *lista)
+{
     int cont = 0;
     tNodo *actual = *lista;
-    while (actual) {
+    while (actual)
+    {
         cont++;
         actual = actual->sig;
     }

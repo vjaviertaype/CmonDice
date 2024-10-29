@@ -2,14 +2,53 @@
 
 int menuPrincipal(CURL *curl)
 {
-    limpiarPantalla();
     const char *options[] = {"Instrucciones", "Jugar", "Ver dificultades","Desarrolladores", "Salir"};
-
+    int continuar = 1;
     int numOptions = sizeof(options) / sizeof(options[0]);
+    int selectedOption;
+    tConfig configuraciones[CANT_MAX_CONFIG];
 
-    int selectedOption = 0;
+    cargarConfig(NOMBRE_CONFIG, configuraciones, CANT_MAX_CONFIG);
+
+    do
+    {
+        limpiarPantalla();
+        selectedOption = menuSeleccionable(options,numOptions);
+
+        switch (selectedOption)
+        {
+        case 0:
+            mostrarInstrucciones();
+            volverAtras();
+            break;
+        case 1:
+            jugar(curl);
+            break;
+        case 2:
+            verDificultad(configuraciones);
+            volverAtras();
+            break;
+        case 3:
+            desarrolladores();
+            volverAtras();
+            break;
+        case 4:
+        case ESCAPE:
+            puts("Saliendo del juego...\n");
+            continuar = 0;
+        }
+
+    }
+    while(continuar);
+
+    return 0;
+}
+
+int menuSeleccionable(const char *options[], int numOptions)
+{
+
     int key;
-
+    int selectedOption = 0;
     do
     {
         displayMenu(options, numOptions, selectedOption);
@@ -27,47 +66,13 @@ int menuPrincipal(CURL *curl)
                 selectedOption++;
             }
         }
-        else if (key == '\r')     // Captura Enter
-        {
-            break; // Sale del bucle al presionar Enter
-        }
-    }
-    while (key != ESCAPE);   // Sale cuando se presiona Escape
 
-    if (key == ESCAPE)
-    {
-        printf("\nSaliendo del juego...\n");
     }
-    else
-    {
-        switch (selectedOption)
-        {
-        case 0:
-            mostrarInstrucciones(curl);
-            volverAtras(curl);
-            break;
-        case 1:
-            // elegirDificultad();
-            jugar(curl);
-            break;
-        case 2:
-            verDificultad(curl);
-            volverAtras(curl);
-            break;
-        case 3:
-            desarrolladores(curl);
+    while(key != '\r' && key != ESCAPE);
 
-            break;
-        case 4:
-            printf("Saliendo del juego...\n");
-            break;
-        }
-    }
-
-    system("pause");
-    return 0;
+    if (key == ESCAPE) return ESCAPE;
+    return selectedOption;
 }
-
 
 void gotoxy(int x, int y)
 {
@@ -85,7 +90,7 @@ void displayMenu(const char *options[], int numOptions, int selectedOption)
     {
         if (i == selectedOption)
         {
-            printf(" > %s\n", options[i]); // Opción seleccionada
+            printf(" > %s\n", options[i]); // OpciÃ³n seleccionada
         }
         else
         {
@@ -94,7 +99,7 @@ void displayMenu(const char *options[], int numOptions, int selectedOption)
     }
 }
 
-void mostrarInstrucciones(CURL*curl)
+void mostrarInstrucciones()
 {
     limpiarPantalla();
 
@@ -106,18 +111,16 @@ void mostrarInstrucciones(CURL*curl)
 
     printf("1. El jugador debe repetir la secuencia de letras que aparece en pantalla.\n");
     printf("2. Solo se puede usar las letras 'A', 'V', 'R', 'N' y 'Z'.\n");
-    printf("3. Se debe ingresar un carácter a la vez.\n");
-    printf("4. Hay un tiempo limitado para ingresar la secuencia después de que se muestre.\n");
+    printf("3. Se debe ingresar un caracter a la vez.\n");
+    printf("4. Hay un tiempo limitado para ingresar la secuencia despues de que se muestre.\n");
     printf("5. Una vez ingresada su respuesta, debe esperar a que el tiempo acabe. Si aprieta 'Z', se finaliza el ingreso de respuesta.\n");
-    printf("6. Cada ronda aumentará el tiempo para ingresar la secuencia.\n");
-    printf("7. Si no contestas, perderás una vida.\n");
-    printf("8. Si respondes mal, podrás volver atrás según cuántas vidas tengas.\n");
+    printf("6. Cada ronda aumentara el tiempo para ingresar la secuencia.\n");
+    printf("7. Si no contestas, perderas una vida.\n");
+    printf("8. Si respondes mal, podras volver atras segun cuantas vidas tengas.\n");
     printf("9. Puedes presionar la tecla 'Z' mientras ingresas la respuesta para usar vidas.\n");
     printf("10. Si te quedas sin vidas, el juego termina.\n");
     printf("\033[1;33m"); // Color amarillo
     printf("\033[0m"); // Restablecer el color
-
-    volverAtras(curl);
 }
 
 int jugar(CURL *curl)
@@ -126,14 +129,16 @@ int jugar(CURL *curl)
     tLista jugadores, tabla;
     tJugador jugador_actual;
     int cant_jugadores, i, config_seleccionada;
-    tConfig configuraciones[CANT_MAX_CONFIG];
+
     FILE *informe;
     crearLista(&jugadores);
     crearLista(&tabla);
 
+    tConfig configuraciones[CANT_MAX_CONFIG];
     cargarConfig(NOMBRE_CONFIG, configuraciones, 3);
 
-    config_seleccionada = seleccionaConfigIndice(configuraciones,CANT_MAX_CONFIG);
+
+    config_seleccionada = seleccionaConfigIndice(configuraciones);
 
     informe = inicializarInforme("informe_loco");
 
@@ -149,7 +154,9 @@ int jugar(CURL *curl)
 
             generarCabeceraJugador(informe, i, jugador_actual.nombre_jugador);
             turnoJugador(informe, &jugador_actual, configuraciones[config_seleccionada], curl, URL);
-            printf("Puntos de %s : %d\n", jugador_actual.nombre_jugador, jugador_actual.puntos);
+
+            printf("Puntos de %s : %d\n\n", jugador_actual.nombre_jugador, jugador_actual.puntos);
+
             fprintf(informe, "Puntaje Final: %d\n", jugador_actual.puntos);
             pausa();
             insertarOrdenado(&tabla, &jugador_actual, sizeof(tJugador), compararPuntajeJugador, true, false);
@@ -160,9 +167,21 @@ int jugar(CURL *curl)
         return ERROR_FATAL;
     }
 
-
+    mostrarSecuencia(&tabla,mostrarJugador);
+    pausa();
     finalizarInforme(informe, &tabla, compararEnteros);
+
+    vaciarLista(&jugadores);
+    vaciarLista(&tabla);
+
     return 1;
+}
+
+void mostrarJugador(void *e)
+{
+    tJugador *j = e;
+
+    printf("%s - %d\n",j->nombre_jugador,j->puntos);
 }
 
 int ingresoDeJugadores(tLista *l)
@@ -170,7 +189,7 @@ int ingresoDeJugadores(tLista *l)
     tJugador jugadorAux;
     int cant_jugadores = 0;
 
-    while (menuIngresoJugador(&jugadorAux) == TODO_OK)
+    while (menuIngresoJugador(&jugadorAux,cant_jugadores) == TODO_OK)
     {
         ponerAlFinal(l, &jugadorAux, sizeof(tJugador));
         cant_jugadores++;
@@ -179,20 +198,20 @@ int ingresoDeJugadores(tLista *l)
     return cant_jugadores;
 }
 
-int menuIngresoJugador(tJugador *pj)
+int menuIngresoJugador(tJugador *pj,int num_jugador)
 {
-    static int cant_jugadores_turno = 1;
     const char *titulo = "INGRESE NOMBRE DEL JUGADOR (0 PARA FINALIZAR INGRESO)\n\n";
-    int espacioIzquierdo = 10; // Ajusta el espaciado según sea necesario
+    int espacioIzquierdo = 10; // Ajusta el espaciado segÃºn sea necesario
     limpiarPantalla();
     printf("\033[1;34m"); // Color azul y negrita
     printf("%*s%s%*s\n", espacioIzquierdo, "", titulo, espacioIzquierdo, "");
     printf("\033[1;31m"); // Rojo y negrita
-    printf("Jugador numero %d: ",cant_jugadores_turno);
+    printf("Jugador numero %d: ",num_jugador +1);
     printf("\033[0m"); // Restablecer el color
+    limpiarBufferTeclado();
     scanf("%s", pj->nombre_jugador);
     pj->puntos = 0;
-    cant_jugadores_turno++;
+
     if (strcmp(pj->nombre_jugador, "0") == 0)
     {
         return EXIT;
@@ -204,12 +223,12 @@ int menuIngresoJugador(tJugador *pj)
 void mostrarTurnoJugador(tJugador *pj)
 {
     limpiarPantalla();
-    printf("\033[1;34m");
     mostrarTitulo();
+    printf("\033[1;34m");
 
     puts("Turno del jugador: ");
     printf("\033[0m"); // Restablecer el color
-    printf("%-17s", pj->nombre_jugador);
+    printf("%-17s\n\n", pj->nombre_jugador);
     printf("\033[1;34m");
     puts("");
 
@@ -232,7 +251,7 @@ int compararEnteros(const void *a, const void *b)
 void mostrarTitulo()
 {
     const char *titulo = "CMON DICE";
-    int anchoConsola = 100; // Ajusta según necesites
+    int anchoConsola = 100; // Ajusta segÃºn necesites
     int longitudTitulo = strlen(titulo);
     int espacioIzquierdo = (anchoConsola - longitudTitulo) / 2;
 
@@ -243,20 +262,33 @@ void mostrarTitulo()
 
 }
 
-void desarrolladores(CURL*curl)
+void desarrolladores()
 {
-    puts("los desarrolladores son");
+    limpiarPantalla();
 
-    volverAtras(curl);
+    printf("\033[1;32m"); // Verde y en negrita
+    puts("Juego desarrollado para la materia Algoritmos Y Etructuras de Datos de la Universidad Nacional de La Matanza");
+    printf("\033[0m"); // Blanco normal
+    puts("\nDesarrolladores:");
+    puts("Gonzalo Mendoza");
+    puts("Victor Javier Taype");
+    puts("Matias Aleman Flores");
+    puts("Lucas Tomas Perez");
+    puts("Thomas Delli Gatti");
+    puts("Victor Beltramino");
+    puts("\nDocentes:");
+    puts("Renata Guatelli");
+    puts("Giselle Rocio Gonzalez");
 }
 
-void verDificultad(CURL*curl)
+void verDificultad(tConfig *vec)
 {
-    puts("la dificultad es");
-    volverAtras(curl);
+    limpiarPantalla();
+    puts("Las dificultades del juego son: \n\n");
+    mostrarConfig(vec);
 }
 
-void volverAtras(CURL* curl)
+void volverAtras()
 {
     int key;
     printf("\n\n> Volver Atras");
@@ -265,5 +297,5 @@ void volverAtras(CURL* curl)
         key = _getch();
     }
     while(key != '\r');
-    menuPrincipal(curl);
 }
+

@@ -34,10 +34,11 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
     mostrarTitulo();
     puts("Se muestra secuencia : ");
 
-    // Funcion de lista que muestra una lista x tiempo. Si se manda 0 como tiempo de muestra, se mostrara la lista en consola sin limite de tiempo.
-    mostrarSecuenciaXTiempo(&l_sec, config_partida.tiempo_muestra, mostrarCaracter);
+    //Funcion de lista que muestra una lista x tiempo. Si se manda 0 como tiempo de muestra, se mostrara la lista en consola sin limite de tiempo.
+    mostrarSecuencia(&l_sec, mostrarCaracter);
+    mostrarTemporizador(config_partida.tiempo_muestra);
+    //Se inicializa una bandera para seguir jugando
 
-    // Se inicializa una bandera para seguir jugando
     int seguir_jugando = 1;
     mostrarTitulo();
     puts("Ingrese su respuesta : ");
@@ -59,14 +60,19 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
                 4)NO_CONTESTA : El jugador no puso nada.
         */
 
-        /// Si no tiene vidas y no respondio correctamente...
-        if (ronda_juego.vidas_total == 0 && (resp == RESPUESTA_INCORRECTA || resp == NO_CONTESTA || resp == USO_CARACTER_ESPECIAL))
+      ///Si no tiene vidas y no respondio correctamente...
+        if(ronda_juego.vidas_total == 0 && resp != RESPUESTA_CORRECTA)
+
         {
             guardarRonda(info, &ronda_juego, &l_sec, &l_resp);
 
             limpiarPantalla();
+            mostrarTitulo();
+            printf("\033[1;31m");
             puts("NO TIENE MAS VIDAS");
             puts("\nGAME OVER\n");
+            printf("\033[0;37m"); // Blanco normal
+
             seguir_jugando = 0;
         }
         else
@@ -84,8 +90,10 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
                 mostrarRonda(++ronda);
                 config_partida.tiempo_turno++;
                 generarSecuencia(&l_sec, curl, url);
+                mostrarTitulo();
                 puts("Se muestra Secuencia :");
-                mostrarSecuenciaXTiempo(&l_sec, config_partida.tiempo_muestra, mostrarCaracter);
+                mostrarSecuencia(&l_sec, mostrarCaracter);
+                mostrarTemporizador(config_partida.tiempo_muestra);
                 puts("Ingrese su respuesta :");
             }
             else if (resp == RESPUESTA_INCORRECTA)
@@ -149,30 +157,33 @@ void noContesta(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *ronda_juego, 
     ronda_juego->vidas_consumidas++;
 
     //...y se le vuelve a mostrar la secuencia
+    mostrarTitulo();
     puts("Se consumio una vida, la secuencia se mostrara nuevamente");
-    mostrarSecuenciaXTiempo(l_sec, tiempo_muestra, mostrarCaracter);
+    mostrarSecuencia(l_sec, mostrarCaracter);
+    mostrarTemporizador(tiempo_muestra);
     puts("Vuelva a escribir su respuesta : ");
 }
 
 void usoCaracterEspecial(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *ronda_juego, unsigned tiempo_muestra, int cant_car_resp)
 {
-    limpiarPantalla();
-
     int vidas_a_usar;
 
-    //
-    printf("Vidas totales : %d \n", ronda_juego->vidas_total);
+    limpiarPantalla();
+    mostrarTitulo();
+
+    printf("Vidas totales : %d \n",ronda_juego->vidas_total);
 
     if (ronda_juego->vidas_total > cant_car_resp)
     {
         /**En este caso el jugador podra usar una vida mas ( si es que tiene) que la cantidad de caracteres de respuesta que tuvo.
             Si esto sucede se le procede a mostrar nuevamente la secuencia.
         */
-        vidas_a_usar = cuantasVidasUsar(1, cant_car_resp + 1);
+
+        vidas_a_usar = cuantasVidasUsar(cant_car_resp + 1 );
     }
     else
     {
-        vidas_a_usar = cuantasVidasUsar(1, ronda_juego->vidas_total);
+        vidas_a_usar = cuantasVidasUsar(ronda_juego->vidas_total);
     }
 
     /// Funcion de lista que elimina los ultimos n elementos de la lista
@@ -181,7 +192,8 @@ void usoCaracterEspecial(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *rond
     if (vidas_a_usar > cant_car_resp)
     {
         puts("La secuencia se mostrara nuevamente : ");
-        mostrarSecuenciaXTiempo(l_sec, tiempo_muestra, mostrarCaracter);
+        mostrarSecuencia(l_sec, mostrarCaracter);
+        mostrarTemporizador(tiempo_muestra);
         puts("Vuelva a escribir su respuesta :");
     }
     else
@@ -191,7 +203,7 @@ void usoCaracterEspecial(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *rond
         else
         {
             puts("Complete su respuesta :");
-            mostrarSecuenciaXTiempo(l_resp, 0, mostrarCaracter);
+            mostrarSecuencia(l_resp, mostrarCaracter);
         }
     }
     ronda_juego->vidas_total -= vidas_a_usar;
@@ -200,35 +212,36 @@ void usoCaracterEspecial(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *rond
 
 void respuestaIncorrecta(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *ronda_juego, int cant_car_resp)
 {
-    limpiarPantalla();
-
     int vidas_a_usar;
 
-    printf("Actualmente tiene %d vidas\n", ronda_juego->vidas_total);
-    if (ronda_juego->vidas_total > cant_car_resp)
-        vidas_a_usar = cuantasVidasUsar(1, cant_car_resp);
+    limpiarPantalla();
+    mostrarTitulo();
+
+    printf("Actualmente tiene %d vidas\n",ronda_juego->vidas_total);
+    if(ronda_juego->vidas_total > cant_car_resp)
+        vidas_a_usar = cuantasVidasUsar(cant_car_resp);
     else
-        vidas_a_usar = cuantasVidasUsar(1, ronda_juego->vidas_total);
+        vidas_a_usar = cuantasVidasUsar(ronda_juego->vidas_total);
 
     /// Funcion de lista que elimina los ultimos n elementos de la lista
     eliminarNUltimos(l_resp, sizeof(char), vidas_a_usar);
 
     if (cant_car_resp == vidas_a_usar)
+    {
+        mostrarTitulo();
         puts("Vuelva a poner su respuesta : ");
+    }
     else
     {
         puts("Complete la respuesta :");
-        mostrarSecuenciaXTiempo(l_resp, 0, mostrarCaracter);
+        mostrarSecuencia(l_resp, mostrarCaracter);
     }
 
     ronda_juego->vidas_total -= vidas_a_usar;
     ronda_juego->vidas_consumidas += vidas_a_usar;
 }
 
-/** Simulacion de solicitud api :
-    Simula un pedido a la api de un digito y lo almacena al final de la lista de secuencia
-*/
-int generarSecuencia(tLista *sec, CURL *curl, const char *url)
+int generarSecuencia(tLista* sec, CURL *curl, const char*url)
 {
     CURLcode res;
     char letra;
@@ -245,8 +258,13 @@ void mostrarRonda(int ronda)
 {
     limpiarPantalla();
     mostrarTitulo();
-    puts("\n");
-    printf("*********************************** R O N D A - %d *****************************\n", ronda);
+    puts("\n\n");
+    printf("\033[1;31m                                      R ");
+    printf("\033[1;32mO ");
+    printf("\033[1;34mN ");
+    printf("\033[1;33mD ");
+    printf("\033[1;35mA ");
+    printf("\033[0m %d",ronda);
 
     Sleep(2000);
     limpiarPantalla();
@@ -259,15 +277,14 @@ int respuestaJugador(tLista *l, unsigned int tiempo_turno)
     time_t tiempo_inicio = time(NULL), tiempo_actual;
     char letra_resp;
 
-    /// esto se puede remplazar con una cola no hay necesidad de utilizar un map, es demaciado
-    if (!listaVacia(l))
-        mapLista(l, &cant_caracteres_resp, contarCantidad);
+    cant_caracteres_resp = contarNodos(l);
 
+    limpiarBufferTeclado();
     while (continuar)
     {
         tiempo_actual = time(NULL);
 
-        if (difftime(tiempo_actual, tiempo_inicio) >= tiempo_turno)
+        if (difftime(tiempo_actual,tiempo_inicio) >= tiempo_turno)
         {
             printf("\nTiempo agotado.\n");
             break;
@@ -286,7 +303,7 @@ int respuestaJugador(tLista *l, unsigned int tiempo_turno)
             }
             else if (isalpha(letra_resp) && (letra_resp == 'A' || letra_resp == 'V' || letra_resp == 'R' || letra_resp == 'N'))
             {
-                printf("%c", letra_resp);
+                mostrarCaracter(&letra_resp);
                 cant_caracteres_resp++;
                 ponerAlFinal(l, &letra_resp, sizeof(char));
             }
@@ -301,53 +318,51 @@ int respuestaJugador(tLista *l, unsigned int tiempo_turno)
     return cant_caracteres_resp;
 }
 
-int cuantasVidasUsar(int min, int max)
+int cuantasVidasUsar(int maximo)
 {
     int vidas;
 
-    printf("Solo puede usar un maximo de %d vidas....Cuantas quiere usar ? : ", max);
+    printf("\nSolo puede usar un maximo de %d vidas....Cuantas quiere usar ? : ", maximo);
     do
     {
         limpiarBufferTeclado();
-        scanf("%d", &vidas);
-        if (vidas < min || vidas > max)
+        scanf("%d",&vidas);
+        if(vidas < 1 || vidas > maximo)
             puts("Ingrese una cantidad valida");
-    } while ((vidas < min || vidas > max));
+    }
+    while((vidas < 1 || vidas > maximo));
+
 
     limpiarPantalla();
     return vidas;
 }
 
-void contarCantidad(void *e, void *contexto)
-{
-    *((int *)contexto) += 1;
-
-    return;
-}
-
-void mostrarCaracter(void *e)
+void mostrarCaracter(void* e)
 {
 
     if (*((char *)e) == 'R')
     {
         printf("\033[1;31m");
-        printf("%c", *((char *)e));
+        printf("%c", *((char*)e) );
     }
-    if (*((char *)e) == 'V')
+    if  (*((char*)e) == 'V')
     {
         printf("\033[1;32m");
-        printf("%c", *((char *)e));
+        printf("%c", *((char*)e) );
+
     }
     if (*((char *)e) == 'N')
     {
         printf("\033[1;33m");
-        printf("%c", *((char *)e));
+        printf("%c", *((char*)e) );
     }
-    if (*((char *)e) == 'A')
+    if (*((char*)e) == 'A')
     {
         printf("\033[1;33m");
-        printf("%c", *((char *)e));
+        printf("%c", *((char*)e) );
+
     }
 
     printf("\033[0;37m");
 }
+

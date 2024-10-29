@@ -25,8 +25,8 @@ int verUltimoLista(const tLista* l, void* dato, unsigned cantBytes);
 void mapLista(tLista* l, void* contexto, Accion accion);
 int eliminarNUltimos(tLista* l,unsigned cantBytes,int cantElim);
 
-/**Esta funcion muestra una lista elemento por elemento por un determinado tiempo */
-int mostrarSecuenciaXTiempo(tLista* l, unsigned int tiempo_muestra, Mostrar mostrar);
+/**Esta funcion muestra una lista elemento por elemento*/
+int mostrarSecuencia(tLista* l, Mostrar mostrar);
 
 /** Compara listas, si son iguales retorna 1, si son distintas retorna 0*/
 int listasIguales(tLista* l_sec, tLista* l_resp,Cmp cmp);
