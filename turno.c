@@ -226,9 +226,9 @@ void respuestaIncorrecta(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *rond
     /// Funcion de lista que elimina los ultimos n elementos de la lista
     eliminarNUltimos(l_resp, sizeof(char), vidas_a_usar);
 
+    mostrarTitulo();
     if (cant_car_resp == vidas_a_usar)
     {
-        mostrarTitulo();
         puts("Vuelva a poner su respuesta : ");
     }
     else

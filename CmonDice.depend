@@ -205,12 +205,13 @@
 	<ctype.h>
 	"../TDA_LISTA/lista.h"
 
-1730169987 source:d:\repos\repos_windows\cmondice\main.c
+1730250782 source:d:\repos\repos_windows\cmondice\main.c
 	"turno.h"
 	"LIBS/TDA_COLA/cola.h"
 	"LIBS/ARCHIVO/archivo.h"
 	"LIBS/CONFIG/config.h"
 	"LIBS/SORTEAR_JUG/sortearJugadores.h"
+	"LIBS/MUSICA/musica.h"
 	"LIBS/MENU/menu.h"
 
 1730169987 d:\repos\repos_windows\cmondice\turno.h
@@ -227,7 +228,7 @@
 	"estructuras.h"
 	"LIBS/MENU/menu.h"
 
-1730169987 source:d:\repos\repos_windows\cmondice\turno.c
+1730251513 source:d:\repos\repos_windows\cmondice\turno.c
 	"turno.h"
 
 1730161099 source:d:\repos\repos_windows\cmondice\libs\tda_cola\cola.c
@@ -252,7 +253,7 @@
 	<ctype.h>
 	"../comun.h"
 
-1730169987 source:d:\repos\repos_windows\cmondice\libs\comun.c
+1730251073 source:d:\repos\repos_windows\cmondice\libs\comun.c
 	"comun.h"
 	"TDA_LISTA/lista.h"
 
@@ -616,10 +617,10 @@
 1730162276 source:c:\users\victo\onedrive\escritorio\cmondice\turno.c
 	"turno.h"
 
-1730169987 source:d:\repos\repos_windows\cmondice\libs\menu\menu.c
+1730251175 source:d:\repos\repos_windows\cmondice\libs\menu\menu.c
 	"menu.h"
 
-1730169987 d:\repos\repos_windows\cmondice\libs\menu\menu.h
+1730251214 d:\repos\repos_windows\cmondice\libs\menu\menu.h
 	"../comun.h"
 	"../CONFIG/config.h"
 	"../ARCHIVO/archivo.h"
@@ -630,6 +631,7 @@
 	"../../estructuras.h"
 	"../SORTEAR_JUG/sortearJugadores.h"
 	"../../turno.h"
+	"../MUSICA/musica.h"
 
 1730168153 no.h"
 
@@ -642,4 +644,13 @@
 
 1730169987 source:d:\repos\repos_windows\cmondice\libs\sortear_jug\sortearjugadores.c
 	"sortearJugadores.h"
+
+1730251348 source:d:\repos\repos_windows\cmondice\libs\musica\musica.c
+	"musica.h"
+
+1730251339 d:\repos\repos_windows\cmondice\libs\musica\musica.h
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<pthread.h>
 

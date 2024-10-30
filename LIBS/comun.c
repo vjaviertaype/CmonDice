@@ -12,7 +12,7 @@ void obtenerFechaDeAhora(char *buffer, unsigned tam)
 ///Funcion que limpia el buffer de teclado en su totalidad...
 void limpiarBufferTeclado()
 {
-
+    fflush(stdin);
     /**fflush solo limpia el buffer de teclado hasta encontrar un salto de linea (\n), Eso significa que
         ... cualquier cosa después del primer "\n" permanecerá en el buffer.
         Ejemplo : si el usuario escribio por teclado : "xrty\n\n\nrb\n"
@@ -30,34 +30,21 @@ void limpiarBufferTeclado()
 
 void limpiarPantalla()
 {
-#ifdef _WIN32
-    /// Si es Windows
-    system("cls");  /// Limpia la pantalla en Windows
-#else
-    /// Para Linux y otros sistemas POSIX
-    system("clear"); /// Limpia la pantalla en Linux
-#endif
+    system("cls");
 }
 
 void pausa()
 {
-#ifdef _WIN32
-    /// Si es Windows
-    system("pause"); /// Pausa en Windows
-#else
-    /// Para Linux y otros sistemas POSIX
-    printf("Presione Enter para continuar...");
-    getchar();  /// Espera a que el usuario presione Enter
-#endif
+    system("pause");
 }
 
 void mostrarTemporizador(unsigned int tiempo) {
-    printf("\nTiempo restante:");
+    printf("\n");
     while (tiempo > 0)
     {
-        printf("%u", tiempo);
+        printf("\rTiempo restante: %2u", tiempo);
+        fflush(stdout);
         Sleep(1000);
-        printf("\b");
         tiempo--;
     }
 
