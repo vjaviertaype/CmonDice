@@ -47,7 +47,7 @@ Al terminar el juego, se generará un informe que detalla las secuencias de cada
 
 ### Archivo de Configuración
 
-Para editar el archivo de configuración, se debe tener en cuenta el siguiente formato:
+Para editar el archivo de configuración `config.txt`, se debe tener en cuenta el siguiente formato:
 
 > **NOTA:** Solo deben ser tres configuraciones, edítelas respetando límites de abajo y no cambie las dificultades de orden.
 
