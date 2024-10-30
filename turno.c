@@ -72,7 +72,7 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
             printf("\033[1;31m");
             mostrarArteASCII(GAME_OVER);
             printf("\033[0;37m"); // Blanco normal
-            reproducir_sonido_temporal(GAMEOVER_SOUND_NAME);
+            iniciar_reproduccion_sonido_temporal(GAMEOVER_SOUND_NAME);
 
             seguir_jugando = 0;
         }
@@ -83,6 +83,7 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
                 printf("\033[1;32m"); // Verde y en negrita
                 puts("\nRESPUESTA CORRECTA");
                 printf("\033[0;37m"); // Blanco normal
+                iniciar_reproduccion_sonido_temporal(SUCCESS_SOUND_NAME);
                 pausa();
                 respuestaCorrecta(info, jugador_actual, &l_sec, &l_resp, &ronda_juego);
 
@@ -101,6 +102,7 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
                 printf("\033[1;31m");
                 puts("\nRESPUESTA INCORRECTA");
                 printf("\033[0;37m"); // Blanco normal
+                iniciar_reproduccion_sonido_temporal(FAILURE_SOUND_NAME);
                 pausa();
                 respuestaIncorrecta(info, &l_sec, &l_resp, &ronda_juego, cant_caracteres_resp);
             }
