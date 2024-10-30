@@ -48,8 +48,6 @@ void mostrarTemporizador(unsigned int tiempo)
         Sleep(1000);
         tiempo--;
     }
-
-    limpiarPantalla();
 }
 
 void ocultarCursor()
@@ -79,11 +77,62 @@ void mostrarTitulo()
     int longitudTitulo = strlen(titulo);
     int espacioIzquierdo = (anchoConsola - longitudTitulo) / 2;
 
+    limpiarPantalla();
     printf("\033[1;34m"); // Color azul y negrita
-    printf("%*s%s%*s\n", espacioIzquierdo, "", titulo, espacioIzquierdo, "");
+    printf("%*s%s%*s\n", espacioIzquierdo - 1, "", titulo, espacioIzquierdo, "");
     printf("***************************************************************************************************\n\n");
     printf("\033[0m"); // Restablecer el color
 
 }
 
+int menuSeleccionable(const char *options[], int numOptions)
+{
 
+    int key;
+    int selectedOption = 0;
+    do
+    {
+        displayMenu(options, numOptions, selectedOption);
+        key = _getch(); // Captura la tecla
+
+        if (key == 0 || key == 224)
+        {
+            key = _getch(); // Captura las teclas especiales
+            if (key == UP_ARROW && selectedOption > 0)
+            {
+                selectedOption--;
+                iniciar_reproduccion_sonido_temporal(NAV_SOUND_NAME);
+            }
+            else if (key == DOWN_ARROW && selectedOption < numOptions - 1)
+            {
+                selectedOption++;
+                iniciar_reproduccion_sonido_temporal(NAV_SOUND_NAME);
+            }
+        }
+
+    }
+    while(key != '\r' && key != ESCAPE);
+
+    if (key == '\r') iniciar_reproduccion_sonido_temporal(MENUENTER_SOUND_NAME);
+
+    if (key == ESCAPE) return ESCAPE;
+    return selectedOption;
+}
+
+void displayMenu(const char *options[], int numOptions, int selectedOption)
+{
+    mostrarTitulo();
+    printf("=== Menu de Opciones === (Seleccione con enter)\n\n");
+
+    for (int i = 0; i < numOptions; i++)
+    {
+        if (i == selectedOption)
+        {
+            printf(" > %s\n", options[i]); // Opción seleccionada
+        }
+        else
+        {
+            printf("   %s\n", options[i]);
+        }
+    }
+}

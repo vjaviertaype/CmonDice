@@ -12,7 +12,7 @@ int menuPrincipal(CURL *curl)
 
     do
     {
-        limpiarPantalla();
+        //limpiarPantalla();
         selectedOption = menuSeleccionable(options,numOptions);
 
         switch (selectedOption)
@@ -44,65 +44,9 @@ int menuPrincipal(CURL *curl)
     return 0;
 }
 
-int menuSeleccionable(const char *options[], int numOptions)
-{
-
-    int key;
-    int selectedOption = 0;
-    do
-    {
-        displayMenu(options, numOptions, selectedOption);
-        key = _getch(); // Captura la tecla
-
-        if (key == 0 || key == 224)
-        {
-            key = _getch(); // Captura las teclas especiales
-            if (key == UP_ARROW && selectedOption > 0)
-            {
-                selectedOption--;
-                iniciar_reproduccion_sonido_temporal(NAV_SOUND_NAME);
-            }
-            else if (key == DOWN_ARROW && selectedOption < numOptions - 1)
-            {
-                selectedOption++;
-                iniciar_reproduccion_sonido_temporal(NAV_SOUND_NAME);
-            }
-        }
-
-    }
-    while(key != '\r' && key != ESCAPE);
-
-    if (key == '\r') iniciar_reproduccion_sonido_temporal(MENUENTER_SOUND_NAME);
-
-    if (key == ESCAPE) return ESCAPE;
-    return selectedOption;
-}
-
-void displayMenu(const char *options[], int numOptions, int selectedOption)
-{
-    limpiarPantalla();
-    mostrarTitulo();
-    printf("=== Menu de Opciones === (Seleccione con enter)\n\n");
-
-    for (int i = 0; i < numOptions; i++)
-    {
-        if (i == selectedOption)
-        {
-            printf(" > %s\n", options[i]); // Opción seleccionada
-        }
-        else
-        {
-            printf("   %s\n", options[i]);
-        }
-    }
-}
-
 void mostrarInstrucciones()
 {
-    limpiarPantalla();
-
     mostrarTitulo();
-
     printf("\033[1;32m"); // Color verde
     puts("Instrucciones:\n");
     printf("\033[0m"); // Restablecer el color
@@ -127,6 +71,7 @@ int jugar(CURL *curl)
     tLista jugadores, tabla;
     tJugador jugador_actual;
     int cant_jugadores, i, config_seleccionada;
+    const char *opciones_config[] = {"FACIL","MEDIO","DIFICIL","SALIR"};
 
     FILE *informe;
     crearPila(&ganadores);
@@ -137,9 +82,11 @@ int jugar(CURL *curl)
     cargarConfig(NOMBRE_CONFIG, configuraciones, 3);
 
 
-    config_seleccionada = seleccionaConfigIndice(configuraciones);
+    config_seleccionada = seleccionaConfigIndice(opciones_config,CANT_MAX_CONFIG + 1);
 
-    informe = inicializarInforme("informe_loco");
+    if(config_seleccionada == CANT_MAX_CONFIG) return ERROR;
+
+    informe = inicializarInforme(PREFIJO);
 
 
     if ((cant_jugadores = ingresoDeJugadores(&jugadores)) > 0)
@@ -171,7 +118,7 @@ int jugar(CURL *curl)
     vaciarLista(&jugadores);
     vaciarLista(&tabla);
 
-    return 1;
+    return TODO_OK;
 }
 
 void mostrarJugador(void *e)
@@ -198,12 +145,13 @@ int ingresoDeJugadores(tLista *l)
 int menuIngresoJugador(tJugador *pj,int num_jugador)
 {
     const char *titulo = "INGRESE NOMBRE DEL JUGADOR (0 PARA FINALIZAR INGRESO)\n\n";
-    int espacioIzquierdo = 10; // Ajusta el espaciado según sea necesario
-    limpiarPantalla();
+    int espacio_separacion = 10; // Ajusta el espaciado según sea necesario
+
+    mostrarTitulo();
     printf("\033[1;34m"); // Color azul y negrita
-    printf("%*s%s%*s\n", espacioIzquierdo, "", titulo, espacioIzquierdo, "");
+    printf("%*s%s%*s\n", espacio_separacion, "", titulo, espacio_separacion, "");
     printf("\033[1;31m"); // Rojo y negrita
-    printf("Jugador numero %d: ",num_jugador +1);
+    printf("Jugador numero %d: ",num_jugador + 1);
     printf("\033[0m"); // Restablecer el color
     limpiarBufferTeclado();
     scanf("%s", pj->nombre_jugador);
@@ -219,7 +167,6 @@ int menuIngresoJugador(tJugador *pj,int num_jugador)
 
 void mostrarTurnoJugador(tJugador *pj)
 {
-    limpiarPantalla();
     mostrarTitulo();
     printf("\033[1;34m");
 
@@ -249,8 +196,7 @@ int compararEnteros(const void *a, const void *b)
 
 void desarrolladores()
 {
-    limpiarPantalla();
-
+    mostrarTitulo();
     printf("\033[1;32m"); // Verde y en negrita
     puts("Juego desarrollado para la materia Algoritmos Y Etructuras de Datos de la Universidad Nacional de La Matanza");
     printf("\033[0m"); // Blanco normal
@@ -268,7 +214,7 @@ void desarrolladores()
 
 void verDificultad(tConfig *vec)
 {
-    limpiarPantalla();
+    mostrarTitulo();
     mostrarConfig(vec);
 }
 

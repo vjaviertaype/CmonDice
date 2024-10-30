@@ -39,12 +39,9 @@ void respuestaCorrecta(FILE*info, tJugador* jugador, tLista* l_sec, tLista* l_re
 void noContesta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, unsigned tiempo_muestra);
 void usoCaracterEspecial(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, unsigned tiempo_muestra ,int cant_car_resp);
 void respuestaIncorrecta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, int cant_car_resp);
+void mostrarSecuenciaXTiempo(tLista *l_sec,unsigned tiempo_muestra,const char *mensaje);
 
 ///Funciones que se usan como puntero a funcion..
 void mostrarCaracter(void* e);
-
-
-/** Funcion encargada de hacer el lote de pruebas...luego BORRAR*/
-int generarSecuenciaParaPruebas(tLista* lista);
 
 #endif // TURNO_H_INCLUDED

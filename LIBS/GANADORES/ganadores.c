@@ -36,7 +36,7 @@ int mostrarGanadores(tPila* pilaG)
     tPila pilaAux;
     int cont = 0;
 
-    limpiarPantalla();
+    mostrarTitulo();
     crearPila(&pilaAux);
     if(pilaVacia(pilaG))
     {

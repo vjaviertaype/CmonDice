@@ -16,14 +16,9 @@
 #include "../TDA_PILA/pila.h"
 #include "../GANADORES/ganadores.h"
 
-#define UP_ARROW 72
-#define DOWN_ARROW 80
-#define ESCAPE 27
-
 void mostrarInstrucciones();
 int menuPrincipal(CURL *curl);
-int menuSeleccionable(const char *options[], int numOptions);
-void displayMenu(const char *options[], int numOptions, int selectedOption);
+
 int jugar(CURL *);
 void mostrarJugador(void *e);
 void mostrarTurnoJugador(tJugador *pj);

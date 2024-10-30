@@ -3,25 +3,30 @@
 int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, CURL *curl, const char *url)
 {
 
-    // Se inicializan los parametros que se usaran para registrar los movimientos del jugador
-    tRonda ronda_juego = {config_partida.cant_vidas, 0, 0};
+    // Guarda los parametros que se usaran para registrar los movimientos del jugador
+    tRonda ronda_juego;
 
-    // Se crea Lista donde se ira guardando la secuencia que se va generando
+    // Lista donde se ira guardando la secuencia que se va generando
     tLista l_sec;
-    crearLista(&l_sec);
 
-    // Se crea Lista donde se almacenara la respuesta del jugador
+    // Lista donde se almacenara la respuesta del jugador
     tLista l_resp;
-    crearLista(&l_resp);
 
-    // Todos los jugadores arrancan en la ronda 1
-    int ronda = 1;
+    // banderas y contadores
+    int ronda,seguir_jugando;
 
     // Resultado de respuesta del jugador
     int resp;
 
     // Almacena la cantidad de caracteres de la respuesta del jugador
     int cant_caracteres_resp;
+
+    ronda = 1;
+    ronda_juego.vidas_total = config_partida.cant_vidas;
+    ronda_juego.vidas_consumidas = 0;
+    ronda_juego.puntos_turno = 0;
+    crearLista(&l_sec);
+    crearLista(&l_resp);
 
     // Muestra la ronda actual
     mostrarRonda(ronda);
@@ -31,15 +36,11 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
     generarSecuencia(&l_sec, curl, url);
 
     // Una vez generada la secuencia se muestra en pantalla el tiempo que indique la configuracion de partida
-    mostrarTitulo();
-    puts("Se muestra secuencia : ");
+    mostrarSecuenciaXTiempo(&l_sec,config_partida.tiempo_muestra,"Se muestra secuencia : ");
 
-    //Funcion de lista que muestra una lista x tiempo. Si se manda 0 como tiempo de muestra, se mostrara la lista en consola sin limite de tiempo.
-    mostrarSecuencia(&l_sec, mostrarCaracter);
-    mostrarTemporizador(config_partida.tiempo_muestra);
-    //Se inicializa una bandera para seguir jugando
+    // Se inicializa una bandera para seguir jugando
+    seguir_jugando = 1;
 
-    int seguir_jugando = 1;
     mostrarTitulo();
     puts("Ingrese su respuesta : ");
 
@@ -52,26 +53,26 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
 
         // Se valida la respuesta, para ello se compararan ambas listas.
         resp = validacionRespuesta(&l_sec, &l_resp);
-        /** Valores que puede tomar resp
-            Tendremos 4 posibilidades de respuesta
+        /*
+            Valores que puede tomar la variable "resp"
+            Tendremos 4 posibilidades de respuesta:
                 1)RESPUESTA_CORRECTA : El jugador respondio correctamente
                 2)RESPUESTA_INCORRECTA : El jugador respondio mal
                 3)USO_CARACTER_ESPECIAL : El jugador apreto una tecla especial(a defidir por el grupo) en medio del ingreso de respuesta.
                 4)NO_CONTESTA : El jugador no puso nada.
         */
 
-      ///Si no tiene vidas y no respondio correctamente...
+        // Si no tiene vidas y no respondio correctamente...
         if(ronda_juego.vidas_total == 0 && resp != RESPUESTA_CORRECTA)
 
         {
             guardarRonda(info, &ronda_juego, &l_sec, &l_resp);
 
-            limpiarPantalla();
             mostrarTitulo();
             printf("\033[1;31m");
-            puts("NO TIENE MAS VIDAS");
-            puts("\nGAME OVER\n");
+            mostrarArteASCII(GAME_OVER);
             printf("\033[0;37m"); // Blanco normal
+            reproducir_sonido_temporal(GAMEOVER_SOUND_NAME);
 
             seguir_jugando = 0;
         }
@@ -79,9 +80,8 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
         {
             if (resp == RESPUESTA_CORRECTA)
             {
-                puts("\n");
                 printf("\033[1;32m"); // Verde y en negrita
-                puts("RESPUESTA CORRECTA");
+                puts("\nRESPUESTA CORRECTA");
                 printf("\033[0;37m"); // Blanco normal
                 pausa();
                 respuestaCorrecta(info, jugador_actual, &l_sec, &l_resp, &ronda_juego);
@@ -90,17 +90,16 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
                 mostrarRonda(++ronda);
                 config_partida.tiempo_turno++;
                 generarSecuencia(&l_sec, curl, url);
+
+                mostrarSecuenciaXTiempo(&l_sec,config_partida.tiempo_muestra,"Se muestra secuencia : ");
+
                 mostrarTitulo();
-                puts("Se muestra Secuencia :");
-                mostrarSecuencia(&l_sec, mostrarCaracter);
-                mostrarTemporizador(config_partida.tiempo_muestra);
                 puts("Ingrese su respuesta :");
             }
             else if (resp == RESPUESTA_INCORRECTA)
             {
-                puts("\n");
                 printf("\033[1;31m");
-                puts("RESPUESTA INCORRECTA");
+                puts("\nRESPUESTA INCORRECTA");
                 printf("\033[0;37m"); // Blanco normal
                 pausa();
                 respuestaIncorrecta(info, &l_sec, &l_resp, &ronda_juego, cant_caracteres_resp);
@@ -153,18 +152,13 @@ void respuestaCorrecta(FILE *info, tJugador *jugador, tLista *l_sec, tLista *l_r
 
 void noContesta(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *ronda_juego, unsigned tiempo_muestra)
 {
-    limpiarPantalla();
-
     // Si el jugador no contesto, se resta una vida si o si
     ronda_juego->vidas_total--;
     // Se toma registro de la vida que esta usando
     ronda_juego->vidas_consumidas++;
 
     //...y se le vuelve a mostrar la secuencia
-    mostrarTitulo();
-    puts("Se consumio una vida, la secuencia se mostrara nuevamente");
-    mostrarSecuencia(l_sec, mostrarCaracter);
-    mostrarTemporizador(tiempo_muestra);
+    mostrarSecuenciaXTiempo(l_sec,tiempo_muestra,"Se consumio una vida, la secuencia se mostrara nuevamente");
 
     mostrarTitulo();
     puts("Vuelva a escribir su respuesta : ");
@@ -174,11 +168,8 @@ void usoCaracterEspecial(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *rond
 {
     int vidas_a_usar;
 
-    limpiarPantalla();
     mostrarTitulo();
-
     printf("Vidas totales : %d \n",ronda_juego->vidas_total);
-
     if (ronda_juego->vidas_total > cant_car_resp)
     {
         /**En este caso el jugador podra usar una vida mas ( si es que tiene) que la cantidad de caracteres de respuesta que tuvo.
@@ -195,13 +186,10 @@ void usoCaracterEspecial(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *rond
     /// Funcion de lista que elimina los ultimos n elementos de la lista
     eliminarNUltimos(l_resp, sizeof(char), vidas_a_usar);
 
-
     if (vidas_a_usar > cant_car_resp)
     {
-        mostrarTitulo();
-        puts("La secuencia se mostrara nuevamente : ");
-        mostrarSecuencia(l_sec, mostrarCaracter);
-        mostrarTemporizador(tiempo_muestra);
+        mostrarSecuenciaXTiempo(l_sec,tiempo_muestra,"La secuencia se mostrara nuevamente : ");
+
         mostrarTitulo();
         puts("Vuelva a escribir su respuesta :");
     }
@@ -224,9 +212,7 @@ void respuestaIncorrecta(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *rond
 {
     int vidas_a_usar;
 
-    limpiarPantalla();
     mostrarTitulo();
-
     printf("Actualmente tiene %d vidas\n",ronda_juego->vidas_total);
     if(ronda_juego->vidas_total > cant_car_resp)
         vidas_a_usar = cuantasVidasUsar(cant_car_resp);
@@ -266,7 +252,6 @@ int generarSecuencia(tLista* sec, CURL *curl, const char*url)
 
 void mostrarRonda(int ronda)
 {
-    limpiarPantalla();
     mostrarTitulo();
     puts("\n\n");
     printf("\033[1;31m                                      R ");
@@ -277,7 +262,6 @@ void mostrarRonda(int ronda)
     printf("\033[0m %d",ronda);
 
     Sleep(2000);
-    limpiarPantalla();
 }
 
 int respuestaJugador(tLista *l, unsigned int tiempo_turno)
@@ -342,8 +326,6 @@ int cuantasVidasUsar(int maximo)
     }
     while((vidas < 1 || vidas > maximo));
 
-
-    limpiarPantalla();
     return vidas;
 }
 
@@ -376,3 +358,10 @@ void mostrarCaracter(void* e)
     printf("\033[0;37m");
 }
 
+void mostrarSecuenciaXTiempo(tLista *l_sec,unsigned tiempo_muestra,const char *mensaje)
+{
+    mostrarTitulo();
+    printf("%s\n",mensaje);
+    mostrarSecuencia(l_sec, mostrarCaracter);
+    mostrarTemporizador(tiempo_muestra);
+}

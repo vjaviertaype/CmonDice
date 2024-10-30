@@ -26,6 +26,6 @@ typedef struct
 int cargarConfig(const char *, tConfig *, unsigned);
 int validarConfig(tConfig *);
 void mostrarConfig(tConfig *);
-int seleccionaConfigIndice(tConfig *);
+int seleccionaConfigIndice(const char *[], unsigned);
 
 #endif // CONFIG_H_INCLUDED

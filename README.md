@@ -1,52 +1,98 @@
 # CmonDice
-Es una variante del juego "Simón dice", donde los jugadores deberan utilizar su memoria para recordar la secuencia de colores mostrada por pantalla y al cabo de un breve tiempo, reproducir la misma de forma exacta con el fin de alcanzar el siguiente round y sumar un determinado puntaje. El juego, sera ganado por el jugador que haya logrado conseguir la mayor cantidad de puntos durante su turno.
 
-##Como jugar?
-El juego consiste en varias partes:
+**CmonDice** es una versión del clásico "Simón dice" que desafía la memoria de los jugadores, quienes deben recordar y repetir una secuencia de colores para avanzar de nivel y ganar puntos. El jugador que acumule más puntos en su turno, ¡gana!
 
-1. **Inicio del Juego**:
-   - Al iniciar, se presenta un menú con varias opciones junto a una pequeña musica que acompañar a los jugadores durante su partida. El menu contendra: 
-     - Instrucciones
-     - Jugar
-     - Ver Dificultades
-     - Desarrolladores
-     - Salir
-       
-   - Si seleccionas "Jugar", se te pedirá que ingreses los nombres de los jugadores. Puedes ingresar tantos nombres como desees. Para dejar de ingresar jugadores, bastara con           ingresar el numero "0"
-   - Si seleccionas "Instrucciones", se te mostrara por pantalla una breve explicacion acerca de como podras jugar.
-   - En el apartado de "Dificultades", podras ver todas las disponibles y el impacto que estas tendran con los tiempos tanto de respuesta como al mostrar la secuencia asi como en       las vidas disponibles.
-   - "Desarrolladores", mostrara un poco los creditos del juego creado indicando las personas involucradas en el mismo.
-   - Por ultimo, la opcion "Salir" permitira al usuario terminar el juego.
+## 📜 Instrucciones de Juego
 
-2. **Configuración del Juego**:
-   - Después de ingresar los nombres, debes elegir el nivel de dificultad del juego: fácil, medio o difícil.
-   - El sistema sorteará el orden en que jugarán los participantes y mostrará las configuraciones del juego, que incluyen:
-     - Cantidad de vidas para cada jugador.
-     - Tiempo que tendrán para ver la secuencia.
-     - Tiempo que tendrán para ingresar la secuencia.
+### 1. Inicio del Juego
+Al iniciar, se presenta un menú interactivo con música de fondo para ambientar la partida. Las opciones disponibles son:
 
-3. **Desarrollo del Juego**:
-   - El primer jugador en el orden sorteado verá una secuencia de letras (R, V, A, N) mostrada una a una durante un tiempo determinado junto a su correspondiente color asignado.
-   - Después de que se elimine la secuencia de la pantalla, el jugador tiene un tiempo limitado para ingresar la secuencia letra por letra.
-   - El jugador puede borrar una letra ingresada pulsando la tecla "Z", lo que consumira una vida. Esto, podrá ser realizado segun cuantas vidas tenga el jugador.
-   - Si el jugador no ingresa la secuencia a tiempo, se indicará que el tiempo ha finalizado. Si tiene vidas disponibles, puede usar una vida para intentar nuevamente.
+- **Instrucciones**: Una guía rápida sobre cómo jugar.
+- **Jugar**: Permite iniciar una partida. Se pedirá seleccionar la dificultad y luego el ingreso de los nombres de los jugadores.
+- **Ver Dificultades**: Muestra los niveles de dificultad disponibles y cómo afectan los tiempos de respuesta y visualización de secuencias, así como las vidas.
+- **Desarrolladores**: Información sobre los creadores del juego.
+- **Salir**: Termina el juego.
 
-4. **Validación de la Secuencia**:
-   - Al finalizar el ingreso, el programa valida si la secuencia ingresada es correcta.
-   - Si es correcta, el jugador avanza a la siguiente secuencia.
-   - Si es incorrecta, se le informará al jugador cuántas vidas tiene y podrá deshacer un número de movimientos según la cantidad de vidas que le queden.
+### 2. Configuración del Juego
+Antes de empezar a jugar, deberá elegir una dificultad: **fácil**, **medio** o **difícil**.
 
-5. **Puntuación**:
-   - Los puntos se suman de la siguiente manera:
-     - +3 puntos por cada secuencia bien ingresada sin usar vidas.
-     - +1 punto por cada secuencia bien ingresada usando vidas.
-   - Al final de todos los turnos, el jugador con la mayor cantidad de puntos es declarado ganador.
+Después, se ingresan los nombres de los jugadores; para finalizar, ingresa el número "0" y oprime `< Enter >`.
 
-6. **Informe Final**:
-   - Al finalizar el juego, se generará un informe que incluirá detalles sobre las secuencias de cada ronda, las respuestas de los jugadores, las vidas utilizadas y el puntaje         total.
+### 3. Desarrollo del Juego
+Se ingresarán los nombres de los jugadores y el sistema sorteará el orden de los turnos.
 
-  
-**Cambios en las configuraciones**
+- El jugador activo observará una secuencia de letras (R, V, A, N) en la pantalla, cada una con su color correspondiente, mostrada de una en una. Luego se le da un tiempo para memorizarla.
+- Una vez retirada la secuencia, el jugador tiene un tiempo limitado para ingresarla, letra por letra.
+- Cada jugador puede borrar una letra ingresada al presionar "Z", lo cual consume una vida. El número de intentos depende de las vidas disponibles.
+- Si no se completa la secuencia a tiempo, se indicará que el tiempo ha finalizado. Si el jugador tiene vidas restantes, se usará una para intentar de nuevo.
 
-En el caso de asi desearlo, el usuario tendra la posibilidad de cambiar las reglas del juego a si antojo, permitiendo la modificacion de las dificultades y sus componentes. Esto, podra ser llevado a cabo mediante la alteracion del archivo "config.txt" el cual se encuentra adjunto al programa.
+### 4. Validación de la Secuencia
+Después de ingresar la secuencia, el sistema valida la respuesta:
 
+- **Correcta**: El jugador avanza al siguiente nivel.
+- **Incorrecta**: Se informará la cantidad de vidas restantes y se podrá deshacer movimientos según las vidas disponibles.
+
+### 5. Puntuación
+La puntuación se calcula de la siguiente forma:
+
+- **+3 puntos** por cada secuencia correctamente ingresada sin usar vidas.
+- **+1 punto** por cada secuencia ingresada correctamente usando vidas.
+
+Al finalizar todos los turnos, el jugador con mayor puntaje será declarado ganador.
+
+### 6. Informe Final
+Al terminar el juego, se generará un informe que detalla las secuencias de cada ronda, respuestas de los jugadores, vidas usadas y puntaje final.
+
+## ⚙️ Configuraciones
+
+### Archivo de Configuración
+
+Para editar el archivo de configuración, se debe tener en cuenta el siguiente formato:
+
+> **NOTA:** Solo deben ser tres configuraciones, edítelas respetando límites de abajo y no cambie las dificultades de orden.
+
+
+```
+NIVEL|TIEMPO_MUESTRA|TIEMPO_RESPUESTA|CANT_VIDAS
+```
+
+- **NIVEL**: Es un único carácter que lo identifica *(F = fácil, M = medio y D = difícil)*.
+- **TIEMPO_MUESTRA**: Es el tiempo que se mostrará la secuencia en pantalla *(se guarda en segundos, con un mínimo de 0 y un máximo de 20 segundos)*.
+- **TIEMPO_RESPUESTA**: Es el tiempo que se esperará la respuesta del jugador *(se guarda en segundos, con un mínimo de 0 y un máximo de 20 segundos)*.
+- **CANT_VIDAS**: Es la cantidad de vidas por ronda de cada jugador *(con un mínimo de 0 y un máximo de 5)*.
+
+### Configuración de `libcurl` y `winmm` en Code::Blocks
+
+#### Paso 1: Descargar `libcurl`
+
+1. **Descargar el Archivo Precompilado**:
+   - Visita la página oficial de [curl](https://curl.se/download.html).
+   - Busca la sección que ofrece las descargas para Windows y elige una versión precompilada para Win32 o Win64.
+
+2. **Descomprimir el Archivo**:
+   - Una vez descargado, descomprime el archivo ZIP en una ubicación de tu elección. Recuerda la ruta, ya que necesitarás acceder a ella más adelante.
+
+#### Paso 2: Estructura de Archivos
+
+Asegúrate de que los siguientes archivos estén disponibles en la carpeta descomprimida:
+
+- **Librerías**: Archivos `.dll`, `.a` o `.lib` (por ejemplo, `libcurl.dll`, `libcurl.dll.a` y `libcurl.a`).
+- **Archivos de Cabecera**: Carpeta `include` que contenga `curl/curl.h`.
+
+#### Paso 3: Configuración en Code::Blocks
+
+1. **Agregar Archivos de Cabecera**:
+   - Ve a **Project > Build options**.
+   - En la pestaña **Search directories**, selecciona **Compiler**.
+   - Agrega la ruta a la carpeta `include` que contiene `curl/curl.h`.
+
+2. **Agregar las Librerías para Enlace**:
+   - En la misma ventana de **Build options**, ve a la pestaña **Linker settings**.
+   - Haz clic en **Add** y agrega `libcurl.dll.a` o `libcurl.a` (la que hayas descargado).
+   - Agrega también la librería `winmm`:
+     - Haz clic en **Add** y escribe `winmm`.
+
+3. **Configurar Opciones de Enlace Adicionales**:
+   - Asegúrate de que la carpeta que contiene `libcurl.dll` esté en la misma carpeta que tu archivo ejecutable o en el **PATH** de tu sistema.
+
+Al finalizar la configuración, deberías poder compilar y ejecutar el programa.

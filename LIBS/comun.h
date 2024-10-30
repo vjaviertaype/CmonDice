@@ -3,8 +3,14 @@
 
 #include <time.h>
 #include <windows.h>
+#include <conio.h>
+#include "MUSICA/musica.h"
 
 #define minimo(X, Y) ( (X) <= (Y)?(X):(Y) )
+
+#define UP_ARROW 72
+#define DOWN_ARROW 80
+#define ESCAPE 27
 
 typedef struct sNodo
 {
@@ -35,6 +41,8 @@ void mostrarCursor();
 
 void mostrarTitulo();
 
+int menuSeleccionable(const char *options[], int numOptions);
+void displayMenu(const char *options[], int numOptions, int selectedOption);
 
 
 #endif // COMUN_H_INCLUDED
