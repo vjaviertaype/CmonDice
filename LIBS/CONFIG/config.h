@@ -1,14 +1,11 @@
 #ifndef CONFIG_H_INCLUDED
 #define CONFIG_H_INCLUDED
 
-#include "../comun.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include "../comun.h"
-
 
 #define CANT_MAX_CONFIG 3
 #define TODO_OK 1

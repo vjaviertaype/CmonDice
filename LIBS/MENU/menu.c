@@ -72,16 +72,10 @@ int menuSeleccionable(const char *options[], int numOptions)
     }
     while(key != '\r' && key != ESCAPE);
 
-   if (key == '\r') iniciar_reproduccion_sonido_temporal(MENUENTER_SOUND_NAME);
+    if (key == '\r') iniciar_reproduccion_sonido_temporal(MENUENTER_SOUND_NAME);
 
     if (key == ESCAPE) return ESCAPE;
     return selectedOption;
-}
-
-void gotoxy(int x, int y)
-{
-    COORD coord = {x, y};
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
 void displayMenu(const char *options[], int numOptions, int selectedOption)
@@ -129,12 +123,13 @@ void mostrarInstrucciones()
 
 int jugar(CURL *curl)
 {
-
+    tPila ganadores;
     tLista jugadores, tabla;
     tJugador jugador_actual;
     int cant_jugadores, i, config_seleccionada;
 
     FILE *informe;
+    crearPila(&ganadores);
     crearLista(&jugadores);
     crearLista(&tabla);
 
@@ -164,17 +159,15 @@ int jugar(CURL *curl)
             fprintf(informe, "Puntaje Final: %d\n", jugador_actual.puntos);
             pausa();
             insertarOrdenado(&tabla, &jugador_actual, sizeof(tJugador), compararPuntajeJugador, true, false);
+
+            cargarPilaGanadores(&ganadores, &jugador_actual, compararPuntajeJugador);
         }
-    }
-    else
-    {
-        return ERROR_FATAL;
+        mostrarGanadores(&ganadores);
+        pausa();
+        finalizarInforme(informe, &tabla, compararEnteros);
     }
 
-    mostrarSecuencia(&tabla,mostrarJugador);
-    pausa();
-    finalizarInforme(informe, &tabla, compararEnteros);
-
+    vaciarPila(&ganadores);
     vaciarLista(&jugadores);
     vaciarLista(&tabla);
 
@@ -252,19 +245,7 @@ int compararEnteros(const void *a, const void *b)
     return *(int *)b - *(int *)a;
 }
 
-void mostrarTitulo()
-{
-    const char *titulo = "CMON DICE";
-    int anchoConsola = 100; // Ajusta según necesites
-    int longitudTitulo = strlen(titulo);
-    int espacioIzquierdo = (anchoConsola - longitudTitulo) / 2;
 
-    printf("\033[1;34m"); // Color azul y negrita
-    printf("%*s%s%*s\n", espacioIzquierdo, "", titulo, espacioIzquierdo, "");
-    printf("***************************************************************************************************\n\n");
-    printf("\033[0m"); // Restablecer el color
-
-}
 
 void desarrolladores()
 {
@@ -288,7 +269,6 @@ void desarrolladores()
 void verDificultad(tConfig *vec)
 {
     limpiarPantalla();
-    puts("Las dificultades del juego son: \n\n");
     mostrarConfig(vec);
 }
 

@@ -107,13 +107,17 @@ int turnoJugador(FILE *info, tJugador *jugador_actual, tConfig config_partida, C
             }
             else if (resp == USO_CARACTER_ESPECIAL)
             {
-                puts("Uso caracter especial");
+                printf("\033[1;33m");
+                puts("\nUso caracter especial");
+                printf("\033[0;37m"); // Blanco normal
                 pausa();
                 usoCaracterEspecial(info, &l_sec, &l_resp, &ronda_juego, config_partida.tiempo_muestra, cant_caracteres_resp);
             }
             else if (resp == NO_CONTESTA)
             {
-                puts("No contesta");
+                printf("\033[1;33m");
+                puts("\nNo contesta");
+                printf("\033[0;37m"); // Blanco normal
                 pausa();
                 noContesta(info, &l_sec, &l_resp, &ronda_juego, config_partida.tiempo_muestra);
             }
@@ -161,6 +165,8 @@ void noContesta(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *ronda_juego, 
     puts("Se consumio una vida, la secuencia se mostrara nuevamente");
     mostrarSecuencia(l_sec, mostrarCaracter);
     mostrarTemporizador(tiempo_muestra);
+
+    mostrarTitulo();
     puts("Vuelva a escribir su respuesta : ");
 }
 
@@ -189,15 +195,19 @@ void usoCaracterEspecial(FILE *info, tLista *l_sec, tLista *l_resp, tRonda *rond
     /// Funcion de lista que elimina los ultimos n elementos de la lista
     eliminarNUltimos(l_resp, sizeof(char), vidas_a_usar);
 
+
     if (vidas_a_usar > cant_car_resp)
     {
+        mostrarTitulo();
         puts("La secuencia se mostrara nuevamente : ");
         mostrarSecuencia(l_sec, mostrarCaracter);
         mostrarTemporizador(tiempo_muestra);
+        mostrarTitulo();
         puts("Vuelva a escribir su respuesta :");
     }
     else
     {
+        mostrarTitulo();
         if (cant_car_resp == vidas_a_usar)
             puts("Vuelva a poner su respuesta : ");
         else

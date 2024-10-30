@@ -278,7 +278,7 @@
 	<ctype.h>
 	"../TDA_LISTA/lista.h"
 
-1729963852 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_lista\lista.h
+1730252044 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_lista\lista.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -287,8 +287,9 @@
 	<windows.h>
 	"../comun.h"
 
-1729963852 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\comun.h
+1730254507 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\comun.h
 	<time.h>
+	<windows.h>
 
 1729963852 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\archivo\archivo.c
 	"archivo.h"
@@ -300,20 +301,21 @@
 	"../TDA_LISTA/lista.h"
 	"../../estructuras.h"
 
-1729963852 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\estructuras.h
+1730207005 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\estructuras.h
 
-1729963852 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\comun.c
+1730254511 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\comun.c
 	"comun.h"
 	"TDA_LISTA/lista.h"
 
-1729834659 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\config\config.c
+1730254502 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\config\config.c
 	"config.h"
 
-1729834659 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\config\config.h
+1730253897 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\config\config.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<ctype.h>
+	"../comun.h"
 
 1729834659 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_cola\cola.c
 	"cola.h"
@@ -324,16 +326,18 @@
 	<string.h>
 	"../comun.h"
 
-1729963852 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_lista\lista.c
+1730207004 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_lista\lista.c
 	"lista.h"
 
-1729963852 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\main.c
+1730255464 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\main.c
 	"turno.h"
-	"LIBS/TDA_COLA/cola.h"
 	"LIBS/ARCHIVO/archivo.h"
+	"LIBS/CONFIG/config.h"
+	"LIBS/SORTEAR_JUG/sortearJugadores.h"
+	"LIBS/MUSICA/musica.h"
+	"LIBS/MENU/menu.h"
 
-1729963852 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\turno.h
-	<windows.h>
+1730253439 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\turno.h
 	<time.h>
 	<stdio.h>
 	<stdlib.h>
@@ -345,11 +349,12 @@
 	"LIBS/TDA_LISTA/lista.h"
 	"LIBS/API/api.h"
 	"estructuras.h"
+	"LIBS/MENU/menu.h"
 
-1729963852 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\turno.c
+1730256360 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\turno.c
 	"turno.h"
 
-1729881245 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\api\api.c
+1730141059 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\api\api.c
 	"api.h"
 
 1729882302 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\api\api.h
@@ -365,10 +370,10 @@
 	<stdlib.h>
 	<curl/curl.h>
 
-1729963852 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\sortear_jug\sortearjugadores.c
+1730207004 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\sortear_jug\sortearjugadores.c
 	"sortearJugadores.h"
 
-1729963852 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\sortear_jug\sortearjugadores.h
+1729993036 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\sortear_jug\sortearjugadores.h
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
@@ -653,4 +658,58 @@
 	<stdlib.h>
 	<windows.h>
 	<pthread.h>
+
+1730255255 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\menu\menu.c
+	"menu.h"
+
+1730254723 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\menu\menu.h
+	"../comun.h"
+	"../CONFIG/config.h"
+	"../ARCHIVO/archivo.h"
+	"../VALIDACION_RESP/validacionResp.h"
+	"../TDA_LISTA/lista.h"
+	"../API/api.h"
+	"../../estructuras.h"
+	"../SORTEAR_JUG/sortearJugadores.h"
+	"../../turno.h"
+	"../MUSICA/musica.h"
+	"../TDA_PILA/pila.h"
+	"../GANADORES/ganadores.h"
+
+1730252105 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\musica\musica.h
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<pthread.h>
+
+1730252105 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\musica\musica.c
+	"musica.h"
+
+1730081064 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\art\arte.c
+	"arte.h"
+
+1730211476 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\art\arte.h
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1730255327 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\ganadores\ganadores.c
+	"ganadores.h"
+
+1730211455 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\ganadores\ganadores.h
+	<stdio.h>
+	<stdlib.h>
+	"../TDA_PILA/pila.h"
+	"../../estructuras.h"
+	"../comun.h"
+	"../ART/arte.h"
+
+1730208229 c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_pila\pila.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../comun.h"
+
+1730208200 source:c:\users\matias\onedrive\algoritmos y estructuras de datos\tp_grupal\cmondice\libs\tda_pila\pila.c
+	"pila.h"
 

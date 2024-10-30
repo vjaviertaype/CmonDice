@@ -39,26 +39,38 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LIBS/ARCHIVO/archivo.h" />
+		<Unit filename="LIBS/ART/arte.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LIBS/ART/arte.h" />
 		<Unit filename="LIBS/CONFIG/config.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LIBS/CONFIG/config.h" />
+		<Unit filename="LIBS/GANADORES/ganadores.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LIBS/GANADORES/ganadores.h" />
 		<Unit filename="LIBS/MENU/menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LIBS/MENU/menu.h" />
+		<Unit filename="LIBS/MUSICA/musica.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LIBS/MUSICA/musica.h" />
 		<Unit filename="LIBS/SORTEAR_JUG/sortearJugadores.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LIBS/SORTEAR_JUG/sortearJugadores.h" />
-		<Unit filename="LIBS/TDA_COLA/cola.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="LIBS/TDA_COLA/cola.h" />
 		<Unit filename="LIBS/TDA_LISTA/lista.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="LIBS/TDA_LISTA/lista.h" />
+		<Unit filename="LIBS/TDA_PILA/pila.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="LIBS/TDA_PILA/pila.h" />
 		<Unit filename="LIBS/VALIDACION_RESP/validacionResp.c">
 			<Option compilerVar="CC" />
 		</Unit>
