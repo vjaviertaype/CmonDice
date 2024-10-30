@@ -60,15 +60,19 @@ int menuSeleccionable(const char *options[], int numOptions)
             if (key == UP_ARROW && selectedOption > 0)
             {
                 selectedOption--;
+                iniciar_reproduccion_sonido_temporal(NAV_SOUND_NAME);
             }
             else if (key == DOWN_ARROW && selectedOption < numOptions - 1)
             {
                 selectedOption++;
+                iniciar_reproduccion_sonido_temporal(NAV_SOUND_NAME);
             }
         }
 
     }
     while(key != '\r' && key != ESCAPE);
+
+   if (key == '\r') iniciar_reproduccion_sonido_temporal(MENUENTER_SOUND_NAME);
 
     if (key == ESCAPE) return ESCAPE;
     return selectedOption;

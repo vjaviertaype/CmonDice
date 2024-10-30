@@ -14,12 +14,11 @@
 #include "../../estructuras.h"
 #include "../SORTEAR_JUG/sortearJugadores.h"
 #include "../../turno.h"
+#include "../MUSICA/musica.h"
 
 #define UP_ARROW 72
 #define DOWN_ARROW 80
 #define ESCAPE 27
-
-// typedef void (*FuncPtr)();
 
 void mostrarInstrucciones();
 int menuPrincipal(CURL *curl);
