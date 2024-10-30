@@ -43,10 +43,12 @@ void mostrarConfig(tConfig *config)
     int i;
     int pos = 1;
 
+    mostrarTitulo();
+    printf("+--------+-------+------------+--------------+--------------+\n");
+    printf("| Indice | Nivel | T. Muestra | T. Respuesta | Cant. Vidas  |\n");
+    printf("+--------+-------+------------+--------------+--------------+\n");
     for (i = 0; i < CANT_MAX_CONFIG; i++)
     {
-        printf("| Indice | Nivel | T. Muestra | T. Respuesta | Cant. Vidas  |\n");
-        printf("+--------+-------+------------+--------------+--------------+\n");
         printf("| %-6d | %-5c | %-10d | %-12d | %-12d |\n",
                pos,
                config->nivel,
@@ -57,8 +59,6 @@ void mostrarConfig(tConfig *config)
         config++;
         pos++;
     }
-
-
 }
 
 int seleccionaConfigIndice(tConfig *vec)
@@ -74,9 +74,12 @@ int seleccionaConfigIndice(tConfig *vec)
         printf("\nIngrese un Indice para seleccionar configuracion del juego: ");
         scanf("%d", &indice);
         if (indice <= 0 || indice > CANT_MAX_CONFIG)
-            printf("\nFuera de rango.\nPor favor elija un indice entre 1 y %d: ", CANT_MAX_CONFIG);
+            printf("\bFuera de rango.\nPor favor elija un indice entre 1 y %d: ", CANT_MAX_CONFIG);
+        fflush(stdout);
     }
     while (indice <= 0 || indice > CANT_MAX_CONFIG);
 
     return --indice;
 }
+
+

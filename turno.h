@@ -21,10 +21,7 @@ int turnoJugador(FILE *info, tJugador* jugador_actual, tConfig config_partida, C
 /**Solo muestra la ronda que esta por empezar*/
 void mostrarRonda(int ronda);
 
-/**Esta funcion SIMULA una solicitud de UN solo numero a la api, hace la conversion del numero al caracter o color asociado y lo almacena al final de la lista
-    -Solo se le debe pasar como argumento la lista donde se guardara lo que solicite de la api.
-    -"Lista* sec_ya_generada" Solo esta para generar los lotes de prueba.
-*/
+/**Solicitud api*/
 int generarSecuencia(tLista* sec, CURL *curl, const char*url);
 
 /**Esta funcion sirve para que el jugador ingrese letra por letra su respuesta en la lista en un determinado tiempo */
@@ -44,7 +41,6 @@ void usoCaracterEspecial(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda
 void respuestaIncorrecta(FILE*info, tLista* l_sec, tLista* l_resp, tRonda* ronda_juego, int cant_car_resp);
 
 ///Funciones que se usan como puntero a funcion..
-void contarCantidad(void* e, void* contexto);
 void mostrarCaracter(void* e);
 
 

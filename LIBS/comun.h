@@ -23,15 +23,18 @@ void limpiarBufferTeclado();
 void limpiarPantalla();
 void pause();
 void mostrarTemporizador(unsigned int tiempo);
-void colorearCaracterVerde(char c);
-void colorearCaracterNaranja(char c);
-void colorearCaracterAmarillo(char c);
-void colorearCaracterRojo(char c);
 
 /// limpieza de I/O
 void limpiarBufferTeclado();
 void limpiarPantalla();
 /// pausa de terminal
 void pausa();
+
+void ocultarCursor();
+void mostrarCursor();
+
+void mostrarTitulo();
+
+
 
 #endif // COMUN_H_INCLUDED

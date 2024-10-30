@@ -38,7 +38,8 @@ void pausa()
     system("pause");
 }
 
-void mostrarTemporizador(unsigned int tiempo) {
+void mostrarTemporizador(unsigned int tiempo)
+{
     printf("\n");
     while (tiempo > 0)
     {
@@ -51,26 +52,38 @@ void mostrarTemporizador(unsigned int tiempo) {
     limpiarPantalla();
 }
 
-void colorearCaracterVerde(char c) {
-    printf("\033[1;32m");  // Verde
-    printf("%c", c);
-    printf("\033[0m");
+void ocultarCursor()
+{
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursorInfo;
+
+    GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+    cursorInfo.bVisible = FALSE; // Ocultar el cursor
+    SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 }
 
-void colorearCaracterNaranja(char c) {
-    printf("\033[0;33m");  // Marrón claro / Naranja aproximado
-    printf("%c", c);
-    printf("\033[0m");
+void mostrarCursor()
+{
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursorInfo;
+
+    GetConsoleCursorInfo(consoleHandle, &cursorInfo);
+    cursorInfo.bVisible = TRUE; // Mostrar el cursor
+    SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 }
 
-void colorearCaracterAmarillo(char c) {
-    printf("\033[1;33m");  // Amarillo
-    printf("%c", c);
-    printf("\033[0m");
+void mostrarTitulo()
+{
+    const char *titulo = "CMON DICE";
+    int anchoConsola = 100; // Ajusta según necesites
+    int longitudTitulo = strlen(titulo);
+    int espacioIzquierdo = (anchoConsola - longitudTitulo) / 2;
+
+    printf("\033[1;34m"); // Color azul y negrita
+    printf("%*s%s%*s\n", espacioIzquierdo, "", titulo, espacioIzquierdo, "");
+    printf("***************************************************************************************************\n\n");
+    printf("\033[0m"); // Restablecer el color
+
 }
 
-void colorearCaracterRojo(char c) {
-    printf("\033[1;31m");  // Rojo
-    printf("%c", c);
-    printf("\033[0m");
-}
+
